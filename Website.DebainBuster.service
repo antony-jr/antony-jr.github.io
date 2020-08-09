@@ -1,0 +1,12 @@
+[Unit]
+Description=Website JS Application
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/yarnpkg --cwd /root/website start -p 3000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
