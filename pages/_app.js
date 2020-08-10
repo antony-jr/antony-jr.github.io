@@ -1,7 +1,10 @@
 import Head from 'next/head';
 
-import '../fonts/fonts.css'
+// Import wallpaper animation css
+import '../background/style.css';
 
+import '../fonts/fonts.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
