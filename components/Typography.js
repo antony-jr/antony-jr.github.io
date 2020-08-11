@@ -1,44 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TypographyH1 = styled.h1`
+
+const Paragraph = styled.p`
+	font-weight: ${props => props.fontWeight || ''};
 	color: ${props => props.fontColor || ''};
 	font-size: ${props => props.fontSize || ''};
-	font-family: ${props => props.fontFamily || 'Indie Flower'};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+`;
+
+
+
+const TypographyH1 = styled.h1`
+	font-weight: ${props => props.fontWeight || ''};
+	color: ${props => props.fontColor || ''};
+	font-size: ${props => props.fontSize || ''};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
 `;
 
 
 const TypographyH2 = styled.h2`
+	font-weight: ${props => props.fontWeight || ''};
 	color: ${props => props.fontColor || ''};
 	font-size: ${props => props.fontSize || ''};
-	font-family: ${props => props.fontFamily || 'Indie Flower'};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
 `;
 
 
 const TypographyH3 = styled.h3`
+	font-weight: ${props => props.fontWeight || ''};	
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
-	font-family: ${props => props.fontFamily || 'Indie Flower'};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
 `;
 
 
 const TypographyH4 = styled.h4`
+	font-weight: ${props => props.fontWeight || ''};	
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
-	font-family: ${props => props.fontFamily || 'Indie Flower'};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
 `;
 
 const TypographyH5 = styled.h5`
+	font-weight: ${props => props.fontWeight || ''};	
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
-	font-family: ${props => props.fontFamily || 'Indie Flower'};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
 `;
 
 
 const TypographyH6 = styled.h6`
+	font-weight: ${props => props.fontWeight || ''};	
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
-	font-family: ${props => props.fontFamily || 'Indie Flower'};
+	font-family: ${props => props.fontFamily || 'Dosis Regular'};
 `;
 
 
@@ -46,7 +62,12 @@ function Typography(props) {
 	var comp_type = null;
 	var fontFamily = null;
 	var fontSize = null;
+	var fontWeight = null;
 	var color = '';
+
+	if(typeof props.weight != 'undefined') {
+		fontWeight = props.weight.toString().toLowerCase();
+	}
 
 	if(typeof props.type == 'undefined') {
 		comp_type = 'h1';
@@ -55,7 +76,7 @@ function Typography(props) {
 	}
 
 	if(typeof props.font == 'undefined') {
-		fontFamily = 'Indie Flower';
+		fontFamily = 'Dosis Regular';
 	}else {
 		fontFamily = props.font.toString().toLowerCase();
 	}
@@ -71,31 +92,50 @@ function Typography(props) {
 	}
 
 	if(comp_type == 'h1') {
-		return (<TypographyH1 fontColor={color} 
+		return (<TypographyH1 
+				fontWeight={fontWeight}
+				fontColor={color} 
 			        fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH1>);
 	} else 	if(comp_type == 'h2') {
-		return (<TypographyH2 fontColor={color} 
+		return (<TypographyH2 
+			fontWeight={fontWeight}		
+			fontColor={color} 
 			fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH2>);
 	}  else if(comp_type == 'h3') {
-		return (<TypographyH3 fontColor={color}  
-			 fontFamily={fontFamily} fontSize={fontSize}>
+		return (<TypographyH3 
+			fontWeight={fontWeight}
+			fontColor={color}  
+			fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH3>);
 	} else if(comp_type == 'h4') {
-		return (<TypographyH4 fontColor={color} 
+		return (<TypographyH4 
+			fontWeight={fontWeight}		
+			fontColor={color} 
 			fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH4>);
 	} else if(comp_type == 'h5') {
-		return (<TypographyH5 fontColor={color} 
+		return (<TypographyH5 
+			fontWeight={fontWeight}		
+			fontColor={color} 
 			fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH5>);
 	} else if(comp_type == 'h6') {
-		return (<TypographyH6 fontColor={color} 
+		return (<TypographyH6 
+			fontWeight={fontWeight}		
+			fontColor={color} 
 			fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH6>);
+	}  else if(comp_type == 'p') {
+		return (<Paragraph 
+			fontWeight={fontWeight}		
+			fontColor={color} 
+			fontFamily={fontFamily} fontSize={fontSize}>
+				{props.children} </Paragraph>);
 	}  else {
 		return (<TypographyH1 
+			fontWeight={fontWeight}		
 			fontColor={color} 
 			fontFamily={fontFamily} fontSize={fontSize}>
 				{props.children} </TypographyH1>);

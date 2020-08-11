@@ -36,38 +36,38 @@ const ShadowSvg = styled.svg`
 
 const SvgDiv = styled.div`
 	max-width: '100%';
-	max-height: 70vh;
+	max-height: 70vw;
 
-	@media (min-width: 200px) {
+	@media (min-width: 200px) and (max-width 300px) {
 		max-height: 1px;
 	}
 
 	@media ${device.laptop} {
-		max-height: 70vh;
+		max-height: 100vw;
 	}
 
 	@media ${device.mobileS} {
-		max-height: 10vh;
+		max-height: 100vw;
 	};
 
 	@media ${device.mobileM} {
-		max-height: 15vh;
+		max-height: 100vw;
 	};
-	
+
 	@media ${device.mobileL} {
-		max-height: 40vh;
+		max-height: 100vw;
 	};
 
 	@media (min-width: 426px) and (max-width: 550px) {
-		max-height: 50vh;
+		max-height: 50vw;
 	}
 
 	@media ${device.laptopL} {
-		max-height: 80vh
+		max-height: 80vw;
 	};
 
 	@media ${device.desktopL} {
-		max-height: 80vh;
+		max-height: 80vw;
 	};
 
 `;
@@ -91,6 +91,23 @@ function AnimatedProfile(props) {
 		duration: 4000,
 		delay: 200,
 	},
+	picture: {
+		yoyo: true,
+		loop: true,
+		repeat: -1,
+		y: -30,
+		duration: 2000,
+		delay: 100,
+	},
+	picHold: {
+		yoyo: true,
+		loop: true,
+		repeat: -1,
+		y: -20,
+		duration: 1000,
+		delay: 100,
+	},
+
 	};
 
 	if(typeof props.color1 != 'undefined') {
@@ -105,8 +122,27 @@ function AnimatedProfile(props) {
 	<SvgDiv>
 		<ShadowSvg viewBox="0 0 480 500">
 		<g stroke="none" 
-		   strokeWidth="1" fill="none" fillRule="evenodd">
+		   strokeWidth="1" fill="white" fillRule="evenodd">
 		  <g id="Group-22" transform="translate(0,40)">
+			   <TweenOne component='g' 
+			     yoyo={true} 
+			     repeat={-1} 
+			     animation={animate.picture}>
+
+	   <rect
+			stroke='white'
+			strokeWidth="1.6"
+			transform={
+			"translate(124.5, 18.0) "+
+			"rotate(8.00) "+
+			"translate(-184.00, -18.000) "}
+			x="200.8"
+			y="2"
+			width="240px"
+			height="390px"
+			/>
+		
+
 			<image
 			 id="profile"
 			 alt="profile"
@@ -115,15 +151,17 @@ function AnimatedProfile(props) {
 			 "rotate(8.00) "+
 			 "translate(-184, -18)"}
 			 xlinkHref={props.src}
-			 width="220px"
-			 height="320px"
-			 x="220.8"
-			 y="40.8"/>
+			 width="250px"
+			 height="370px"
+			 x="200.8"
+			 y="10.8"/>
+			   </TweenOne>
 		   </g>
 		</g>
 
+			{/*
 		<g stroke="none" 
-		   strokeWidth="1" 
+		   strokeWidth="1.6" 
 		   fill={color1} 
 		   fillRule="evenodd" 
 		   transform="translate(0,30)">
@@ -149,12 +187,10 @@ function AnimatedProfile(props) {
 			/>
 		     </TweenOne>
 		 </g>
-		</g>
-
-
-
+		</g>*/}
+		{/*
 		<g stroke="none" 
-		   strokeWidth="1" 
+		   strokeWidth="1.5" 
 		   fill={color2}
 		   fillRule="evenodd" 
 		   transform="translate(0,30)">
@@ -164,7 +200,7 @@ function AnimatedProfile(props) {
 			 yoyo={true} 
 			 repeat={-1}
 			 animation={animate.whiteSquare}>
-			 <rect
+			   <rect
 			  stroke={color2}
 			  strokeWidth="2.6"
 			  transform={
@@ -178,7 +214,7 @@ function AnimatedProfile(props) {
 			  rx="3.6"/>
 		   </TweenOne>
 		  </g>
-		</g>
+		</g>*/}
 	     </ShadowSvg>
 	</SvgDiv>);
 }
