@@ -50,6 +50,13 @@ function TNavItem(props) {
 	  <Nav.Item>
 	  <LinkCursor 
 		  height={hover}
+		  onClick={
+			  () => {
+				if(typeof props.url != 'undefined'){
+					window.location.href = props.url;
+				}
+			  }
+		  }
 		  onMouseEnter={
 			  () => {
 				  if(props.active) {
@@ -133,11 +140,11 @@ export default function MyApp({ Component, pageProps }) {
 			<Navbar>
 			<Navbar.Collapse className="justify-content-center">
 			<Nav variant="pills" defaultActiveKey="/">
-			<TNavItem active={router.pathname == '/'}>		  
+			<TNavItem url='/' active={router.pathname == '/'}>		  
 				Home
 			</TNavItem>
 			<NavItemSeparator/>
-			<TNavItem active={router.pathname == '/blog'}>		  
+			<TNavItem url='/blog' active={router.pathname == '/blog'}>		  
 				Blog
 			</TNavItem>
 			<NavItemSeparator/>
@@ -158,7 +165,6 @@ export default function MyApp({ Component, pageProps }) {
 
 		   </div>
 		   <footer>
-test
 		   </footer>
 	   </React.Fragment>
    </>);

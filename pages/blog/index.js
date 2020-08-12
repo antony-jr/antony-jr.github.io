@@ -50,7 +50,7 @@ function Blog(props) {
 			<FlexCenter>
 				<table style={{display: 'table', padding: '20px'}}>
 				{props.posts.map((key, index) => (
-				  <tr>
+				  <tr key={index}>
 				   <td style={{padding: '20px',}}>
 				    <div style={{background: 'black'}}>
 				      <DateDiv>{key.slug}</DateDiv>
