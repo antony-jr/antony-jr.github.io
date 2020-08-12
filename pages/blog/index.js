@@ -32,13 +32,31 @@ const DotDiv = styled.div`
 `;
 
 const TitleDiv = styled.div`
-	
+	cursor: pointer;
 	font: bold 1.1rem 'Dosis Regular';
 	flex-grow: 1;
 	max-width: 400px;
 `;
 
 function Blog(props) {
+
+	const validFile = slugName => {
+		var r = slugName.split('-');
+		if(r.length != 3) {
+			return false;
+		}
+
+		var day = Number(r[0]),
+		    month = Number(r[1]),
+		    year = Number(r[2]);
+
+		if(day > 31 || month > 12) {
+			return false;
+		}
+
+		return true;
+	}
+
 	return (
 		<React.Fragment>
 			<div style={{
@@ -48,7 +66,8 @@ function Blog(props) {
 			}}>
 				<table style={{display: 'table', padding: '20px'}}>
 				{props.posts.map((key, index) => (
-				  <tr key={index}>
+				  
+				  validFile(key.slug) && (<tr key={index}>
 				   <td style={{padding: '20px',}}>
 				    <div style={{background: 'black'}}>
 				      <DateDiv>{key.slug}</DateDiv>
@@ -56,7 +75,12 @@ function Blog(props) {
 				   </td>
 				   
 				   <td style={{paddingRight: '10px', width: '300px'}}>
-				    <TitleDiv>
+				    <TitleDiv onClick={
+					    () => {
+						    window.location.href = '/blog/post/' + 
+							                     key.slug;
+					    }
+					  }>
 				     {key.badge && <Badge pill variant="dark">
 					      {key.badge}
 				      </Badge>}{' '}	
@@ -66,7 +90,7 @@ function Blog(props) {
 				      by {key.author}
 				    </Typography>
 				   </td>
-				  </tr>))}
+				  </tr>)))}
 			         </table>
 			</div>
 		</React.Fragment>
