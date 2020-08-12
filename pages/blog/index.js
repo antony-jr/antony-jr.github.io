@@ -11,12 +11,6 @@ import Badge from 'react-bootstrap/Badge';
 
 import Typography from '../../components/Typography.js';
 
-const FlexCenter = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
 const BlogList = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -47,7 +41,11 @@ const TitleDiv = styled.div`
 function Blog(props) {
 	return (
 		<React.Fragment>
-			<FlexCenter>
+			<div style={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}>
 				<table style={{display: 'table', padding: '20px'}}>
 				{props.posts.map((key, index) => (
 				  <tr key={index}>
@@ -70,7 +68,7 @@ function Blog(props) {
 				   </td>
 				  </tr>))}
 			         </table>
-			</FlexCenter>
+			</div>
 		</React.Fragment>
 	);
 }
