@@ -49,16 +49,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 
 			</Typography>
 
-					<SIcon url="https://twitter.com/antonyjr0"/>
-		
+				<div>
+					<SIcon url="https://twitter.com/antonyjr0"/>	
 					<SIcon url="https://www.youtube.com/channel/UCdcXDHx3gvC0Q9TuOOb7YRw"/>
-
-			
 					<SIcon url="https://github.com/antony-jr"/>
-
-	
-						<SIcon url="mailto:antonyjr@protonmail.com"/>
-
+					<SIcon url="mailto:antonyjr@protonmail.com"/>
+				</div>
 	
 			
 				</Col>

@@ -6,7 +6,7 @@ import '../background/style.css';
 
 import '../fonts/Dosis.css'
 import '../fonts/DosisRegular.css';
-import '../fonts/GreatSejagad.css';
+import '../fonts/1942.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -145,9 +145,6 @@ export default function MyApp({ Component, pageProps }) {
 				Projects
 			</TNavItem>
 			<NavItemSeparator/>
-			<TNavItem active={router.pathname == '/publickeys'}>		  
-				Public Keys
-			</TNavItem>
 			
 			</Nav>
 			</Navbar.Collapse>
