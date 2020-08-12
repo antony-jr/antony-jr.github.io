@@ -144,8 +144,6 @@ export default function MyApp({ Component, pageProps }) {
 			<TNavItem active={router.pathname == '/projects'}>		  
 				Projects
 			</TNavItem>
-			<NavItemSeparator/>
-			
 			</Nav>
 			</Navbar.Collapse>
 			</Navbar>
