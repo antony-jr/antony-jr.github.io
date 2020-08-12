@@ -32,12 +32,14 @@ export const device = {
 const ShadowSvg = styled.svg`
   -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
   filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  z-index: -1;
 `;
 
 const SvgDiv = styled.div`
-	max-width: '100%';
+	z-index: -1;
+	max-width: 100%;
 	max-height: 70vw;
-
+	
 	@media (min-width: 200px) and (max-width 300px) {
 		max-height: 1px;
 	}
@@ -73,8 +75,8 @@ const SvgDiv = styled.div`
 `;
 
 function AnimatedProfile(props) {
-	var color1 = '#212121';
-	var color2 = '#F50057';
+	var object1 = null;
+	var object2 = null;
 
 	const animate = {
 	blackSquare: {
@@ -110,12 +112,12 @@ function AnimatedProfile(props) {
 
 	};
 
-	if(typeof props.color1 != 'undefined') {
-		color1 = props.color1.toString().toLowerCase();
+	if(typeof props.object1 != 'undefined') {
+		object1 = props.object1.toString().toLowerCase();
 	}
 
-	if(typeof props.color2 != 'undefined') {
-		color2 = props.color2.toString().toLowerCase();
+	if(typeof props.object2 != 'undefined') {
+		object2 = props.object2.toString().toLowerCase();
 	}
 
 	return ( 
@@ -159,10 +161,8 @@ function AnimatedProfile(props) {
 		   </g>
 		</g>
 
-			{/*
 		<g stroke="none" 
-		   strokeWidth="1.6" 
-		   fill={color1} 
+		   fill="none" 
 		   fillRule="evenodd" 
 		   transform="translate(0,30)">
 				
@@ -172,50 +172,43 @@ function AnimatedProfile(props) {
 			     yoyo={true} 
 			     repeat={-1} 
 			     animation={animate.blackSquare}>
-			<rect
-			stroke={color1}
-			strokeWidth="1.6"
+			<image
+			xlinkHref={object1}
 			transform={
 			"translate(184.0, 18.0) "+
 			"rotate(8.00) "+
 			"translate(-184.00, -18.000) "}
 			x="120.8"
-			y="0"
-			width="50px"
-			height="50px"
-			rx="3.6"
+			y="-80"
+			width="110px"
+			height="110px"
 			/>
 		     </TweenOne>
 		 </g>
-		</g>*/}
-		{/*
-		<g stroke="none" 
-		   strokeWidth="1.5" 
-		   fill={color2}
-		   fillRule="evenodd" 
-		   transform="translate(0,30)">
-		  <g id="Group-13" transform="translate(0.000, 41.000)">
-		   <TweenOne 
-			 component='g'
-			 yoyo={true} 
-			 repeat={-1}
-			 animation={animate.whiteSquare}>
-			   <rect
-			  stroke={color2}
-			  strokeWidth="2.6"
-			  transform={
-			  "translate(184.0, 18.0) "+
-			  "rotate(8.00) "+
-			  "translate(-184.00, -18.000) "}
-			  x="340.8"
-			  y="240.8"
-			  width="60px"
-			  height="60px"
-			  rx="3.6"/>
-		   </TweenOne>
-		  </g>
-		</g>*/}
-	     </ShadowSvg>
+		</g>
+		
+			<g id="Group-13" 
+		   transform="translate(0.000, 41.000)">
+		   <TweenOne component='g' 
+			     yoyo={true} 
+			     repeat={-1} 
+			     animation={animate.blackSquare}>
+			<image
+			xlinkHref={object2}
+			transform={
+			"translate(184.0, 18.0) "+
+			"rotate(8.00) "+
+			"translate(-184.00, -18.000) "}
+			x="290.8"
+			y="280.8"
+			width="110px"
+			height="110px"
+			/>
+		     </TweenOne>
+		 </g>
+
+     
+	</ShadowSvg>
 	</SvgDiv>);
 }
 

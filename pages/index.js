@@ -5,6 +5,7 @@ import Fade from 'react-reveal/Fade';
 import Pulse from 'react-reveal/Pulse';
 import Flash from 'react-reveal/Flash';
 import Swing from 'react-reveal/Swing';
+import Zoom from 'react-reveal/Zoom';
 
 import Typography from '../components/Typography.js';
 import AnimatedProfile from '../components/AnimatedProfile.js';
@@ -16,20 +17,19 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-const WrapperRow = styled(Row)`
-        margin-top: 30px;
-	min-height: 80vh;
-	justify-content: center;
-	align-items: flex-start;
+import { SocialIcon } from 'react-social-icons';
+
+const SIcon = styled(SocialIcon)`
+	margin: 10px;
 `;
 
 function Index() {
 	return (
 		<React.Fragment>
-			<Fade big opposite collapse>
 			<Container fluid='lg'>
-			<WrapperRow>
-			<Col sm={8}>
+			
+				<Row style={{justifyContent: 'center'}}>
+					<Col sm={8}>
 				<Flash>
 			<Typography 
 				type='h2'font='Dosis Bold'>
@@ -48,17 +48,61 @@ function Index() {
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in iaculis mattis. Vestibulum nec gravida magna. Vivamus volutpat lacus non iaculis gravida. Nulla sollicitudin id nisl nec lacinia. Curabitur vel nisi nec erat pulvinar commodo. Ut nec eros nisl. Donec ut velit ac ante elementum semper. Ut vulputate, lectus eget porta tempus, orci arcu vestibulum velit, nec aliquet lacus nulla ac mi. Nam nec interdum turpis. Etiam bibendum nibh id augue sagittis, at mattis enim vestibulum. Donec malesuada eu nunc vel dictum. Cras vestibulum sollicitudin diam, molestie pulvinar mi commodo non. Nam sagittis est ut neque pretium, a elementum leo tristique. Suspendisse at mollis odio, in euismod orci.
 
 			</Typography>
-			</Col>
-							<Col sm={4}>
-			<AnimatedProfile
-				color1='#212121'
-				color2='#424242'
-				src='/me_rgb.png'/>
-				</Col>
+
+					<SIcon url="https://twitter.com/antonyjr0"/>
+		
+					<SIcon url="https://www.youtube.com/channel/UCdcXDHx3gvC0Q9TuOOb7YRw"/>
+
+			
+					<SIcon url="https://github.com/antony-jr"/>
+
 	
-			</WrapperRow>
-		</Container>
-			</Fade>
+						<SIcon url="mailto:antonyjr@protonmail.com"/>
+
+	
+			
+				</Col>
+
+					<Col sm={4} style={{
+						height: '500px'
+					}}> 
+					
+			<AnimatedProfile
+				object1='/triangle.png'
+				object2='/triangle_inverted_white.png'
+				src='/me_rgb.png'/>
+	
+					</Col>
+				</Row>
+
+				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
+					<Col style={{height: '500px', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Zoom>
+					<img
+						src='/updates_title.png'
+						/>
+					</Zoom>
+					<br/ >
+
+					<br/>
+					</Col>
+				</Row>
+				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
+				<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Zoom>
+					<img
+						src='/pubkeys_title.png'
+						/>
+					</Zoom>
+
+
+					<br />
+					<br />
+
+					</Col>
+				</Row>
+
+			</Container>
 		</React.Fragment>
 	);
 }

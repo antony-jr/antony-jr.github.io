@@ -6,6 +6,7 @@ import '../background/style.css';
 
 import '../fonts/Dosis.css'
 import '../fonts/DosisRegular.css';
+import '../fonts/GreatSejagad.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -151,9 +152,19 @@ export default function MyApp({ Component, pageProps }) {
 			</Nav>
 			</Navbar.Collapse>
 			</Navbar>
-	
 
+		   <div
+			style={{
+
+				minHeight: '100vh',
+			}}
+		   >
 		  <Component {...pageProps} />
+
+		   </div>
+		   <footer>
+test
+		   </footer>
 	   </React.Fragment>
    </>);
 }
