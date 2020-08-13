@@ -86,6 +86,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 				</Col>
 
 				</Row>
+				</Zoom>
 
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 					<Col style={{height: '500px', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
@@ -101,7 +102,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 					</Col>
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
-				<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
 					<Zoom>
 						<br/>
 						<br/>
@@ -111,13 +112,35 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 					</Zoom>
 					<br />
 					<br />
-					<pre>
-						This is something.
-					</pre>
-
 					</Col>
 				</Row>
-				</Zoom>
+				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
+					<Col style={{minWidth: '200px'}}>
+						<Typography type='p'>
+							This is my <b>primary key</b>, please follow this site to know if I change
+							my key which will not be that often. <br/>
+							You can encrypt sensitive data that you want to sent to me via email.
+							I also will be using this key to sign all my data files.
+							If you want encrypted response then you must send your GPG public key first.
+
+						</Typography>
+					</Col>
+					<Col >
+						<pre style={{overflowY: 'hidden', overflowX: 'auto', backgroundColor: 'black', color: 'green', padding: '10px'}}>
+						{'pub   rsa4096/3156C8D324D12E73 2020-07-21 [SC]\n' +
+						 '      54AFD2B538FF0107631D72AE3156C8D324D12E73\n' +
+						 'uid                 [ultimate] J.R. Divya Antony <antonyjr@protonmail.com>\n' +
+						 'sub   rsa4096/0AF1A22AF304CE37 2020-07-21 [E]\n'}
+						</pre>
+					</Col>
+				</Row>
+				<Row style={{justifyContent: 'center', alignItems: 'center', paddingBottom: '100px',}}>
+					<Typography type='h4' font='Dosis Bold'>
+						<a href='' style={{color: 'black'}}>
+						Get GPG Public Key
+						</a>
+					</Typography>
+				</Row>
 			</Container>
 		</React.Fragment>
 	);
