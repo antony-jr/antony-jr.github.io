@@ -23,6 +23,11 @@ import Col from 'react-bootstrap/Col';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Image from 'react-bootstrap/Image';
+
+import { SocialIcon } from 'react-social-icons';
+
+
 
 const LinkCursor = styled.div`
 	cursor: pointer;
@@ -37,7 +42,6 @@ const LinkCursor = styled.div`
 const DefaultCursor = styled.div`
 	cursor: default;
 `;
-
 
 function TNavItem(props) {
 
@@ -98,6 +102,15 @@ function NavItemSeparator(props) {
 }
 
 
+function SocialIconSM(props) {
+	return (<SocialIcon 
+		    bgColor='black' 
+		    url={props.url}
+		    style={{width: 30, height: 30, margin: '10px',}}
+	/>);	
+			
+}
+
 
 
 // This default export is required in a new `pages/_app.js` file.
@@ -119,11 +132,12 @@ export default function MyApp({ Component, pageProps }) {
 			<Navbar.Collapse className="justify-content-center">
 			<Navbar.Brand href="/">
 				<Swing spy={logoSwing}>
-				<img
+				<Image
+				  fluid
 				  onMouseOver={handleMouseOverLogo}
 				  src='/ajr_logo.png'
-				  width="125px"
-				  height="125px"
+				  width="120px"
+				  height="120px"
 				  className="d-inline-block align-top"
 				/>
 				</Swing>
@@ -164,7 +178,28 @@ export default function MyApp({ Component, pageProps }) {
 		  <Component {...pageProps} />
 
 		   </div>
-		   <footer>
+		   <footer
+			   style={{padding: '2rem', textAlign: 'center', width: '100%', background: 'white'}}>
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'space-evenly',
+				alignItems: 'center',
+			}}>
+			<Typography type='h6'>
+				   {'\u00A9 '}2020 Antony Jr.
+			   </Typography>
+
+			   	<div>
+					<SocialIconSM url="https://twitter.com/antonyjr0"/>	
+					<SocialIconSM url="https://www.youtube.com/channel/UCdcXDHx3gvC0Q9TuOOb7YRw"/>
+					<SocialIconSM url="https://github.com/antony-jr"/>
+					<SocialIconSM url="mailto:antonyjr@protonmail.com"/>
+	
+	
+			   </div>
+		</div>
 		   </footer>
 	   </React.Fragment>
    </>);

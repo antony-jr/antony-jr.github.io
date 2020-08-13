@@ -7,6 +7,15 @@ const Paragraph = styled.p`
 	color: ${props => props.fontColor || ''};
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+	@media (max-width: 331px) {
+		font-size: 0.5rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.2rem;
+	}
+
 `;
 
 
@@ -16,6 +25,15 @@ const TypographyH1 = styled.h1`
 	color: ${props => props.fontColor || ''};
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+	@media (max-width: 331px) {
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.5rem;
+	}
+
 `;
 
 
@@ -24,6 +42,17 @@ const TypographyH2 = styled.h2`
 	color: ${props => props.fontColor || ''};
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+
+	@media (max-width: 331px) {
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.5rem;
+	}
+
+
 `;
 
 
@@ -32,6 +61,18 @@ const TypographyH3 = styled.h3`
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+
+	@media (max-width: 331px) {
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.5rem;
+	}
+
+
+
 `;
 
 
@@ -40,6 +81,18 @@ const TypographyH4 = styled.h4`
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+
+	@media (max-width: 331px) {
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.5rem;
+	}
+
+
+
 `;
 
 const TypographyH5 = styled.h5`
@@ -47,6 +100,18 @@ const TypographyH5 = styled.h5`
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+
+	@media (max-width: 331px) {
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.5rem;
+	}
+
+
+
 `;
 
 
@@ -55,6 +120,18 @@ const TypographyH6 = styled.h6`
 	color: ${props => props.fontColor || ''};	
 	font-size: ${props => props.fontSize || ''};
 	font-family: ${props => props.fontFamily || 'Dosis Regular'};
+
+
+	@media (max-width: 331px) {
+		font-size: 0.8rem;
+	}
+
+	@media (max-width: 191px) {
+		font-size: 0.5rem;
+	}
+
+
+
 `;
 
 

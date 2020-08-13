@@ -16,6 +16,7 @@ import Col from 'react-bootstrap/Col';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Image from 'react-bootstrap/Image'
 
 import { SocialIcon } from 'react-social-icons';
 
@@ -23,19 +24,44 @@ const SIcon = styled(SocialIcon)`
 	margin: 10px;
 `;
 
+const WrapperCol = styled(Col)`
+	height: 400px;
+
+	@media (max-width: 375px) {
+		height: 350px;
+	}
+
+	@media (max-width: 330px) {
+		height: 300px;
+	}
+
+	@media (max-width: 280px) {
+		height: 250px;
+	}
+`;
+
 function Index() {
 	return (
 		<React.Fragment>
-			<Container fluid='lg'>
-			
-				<Row style={{justifyContent: 'center'}}>
+			<Container style={{marginTop: '40px',}} fluid='lg'>
+		
+				<Zoom>
+				<Row style={{justifyContent: 'center', flexWrap: 'wrap-reverse'}}>
+					
+					<WrapperCol> 
+					
+			<AnimatedProfile
+				object1='/triangle.png'
+				object2='/triangle_inverted_white.png'
+				src='/me_rgb.png'/>
+	
+					</WrapperCol>
+	
 					<Col sm={8}>
-				<Flash>
 			<Typography 
 				type='h2'font='Dosis Bold'>
 				<b>Hi., I'm Antony.</b>
 			</Typography>
-				</Flash>
 			<Typography
 				type='h3'>
 				I'm an <b>Open Source Developer</b> and <b>Aspiring Computer Scientist</b>.
@@ -50,33 +76,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 			</Typography>
 
 				<div>
-					<SIcon url="https://twitter.com/antonyjr0"/>	
-					<SIcon url="https://www.youtube.com/channel/UCdcXDHx3gvC0Q9TuOOb7YRw"/>
-					<SIcon url="https://github.com/antony-jr"/>
-					<SIcon url="mailto:antonyjr@protonmail.com"/>
+					<SIcon bgColor='black' url="https://twitter.com/antonyjr0"/>	
+					<SIcon bgColor='black' url="https://www.youtube.com/channel/UCdcXDHx3gvC0Q9TuOOb7YRw"/>
+					<SIcon bgColor='black' url="https://github.com/antony-jr"/>
+					<SIcon bgColor='black' url="mailto:antonyjr@protonmail.com"/>
 				</div>
 	
 			
 				</Col>
 
-					<Col sm={4} style={{
-						height: '500px'
-					}}> 
-					
-			<AnimatedProfile
-				object1='/triangle.png'
-				object2='/triangle_inverted_white.png'
-				src='/me_rgb.png'/>
-	
-					</Col>
 				</Row>
 
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 					<Col style={{height: '500px', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
 					<Zoom>
-					<img
-						src='/updates_title.png'
-						/>
+						<br/>
+						<br/>
+					<Image
+					src="/updates_title.png" fluid/>
 					</Zoom>
 					<br/ >
 
@@ -86,18 +103,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 				<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
 					<Zoom>
-					<img
-						src='/pubkeys_title.png'
-						/>
+						<br/>
+						<br/>
+						<Image
+					src="/pubkeys_title.png" fluid/>
+					
 					</Zoom>
-
-
 					<br />
 					<br />
+					<pre>
+						This is something.
+					</pre>
 
 					</Col>
 				</Row>
-
+				</Zoom>
 			</Container>
 		</React.Fragment>
 	);

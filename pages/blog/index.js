@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
+import Pagination from 'react-bootstrap/Pagination'
 
 import Typography from '../../components/Typography.js';
 
@@ -21,60 +22,76 @@ const BlogList = styled.div`
 const DateDiv = styled.div`
 	font: bold 1rem 'Dosis Bold';
 	font-weight: 700px;
-	flex-grow: 0;
 	margin: 10px;
 	color: white;
-`;
 
-const DotDiv = styled.div`
-	flex-grow: 0;
-	margin: 10px;
+	@media (max-width: 331px) {
+		font: bold 0.5rem 'Dosis Bold';
+	}
+
+	@media (max-width: 191px) {
+		font: bold 0.2rem 'Dosis Bold';
+	}
 `;
 
 const TitleDiv = styled.div`
 	cursor: pointer;
 	font: bold 1.1rem 'Dosis Regular';
-	flex-grow: 1;
 	max-width: 400px;
+
+	@media (max-width: 331px) {
+		font: bold 0.8rem 'Dosis Regular';
+	}
+
+	@media (max-width: 191px) {
+		font: bold 0.5rem 'Dosis Regular';
+	}
 `;
 
 function Blog(props) {
+	var pageItems = [];
 
-	const validFile = slugName => {
-		var r = slugName.split('-');
-		if(r.length != 3) {
-			return false;
-		}
-
-		var day = Number(r[0]),
-		    month = Number(r[1]),
-		    year = Number(r[2]);
-
-		if(day > 31 || month > 12) {
-			return false;
-		}
-
-		return true;
+	const [pageNumber, setPageNumber] = React.useState(1);
+	
+	const handlePageClick = event => {
+		const pageRequested = Number(event.target.innerText);
+		setPageNumber(pageRequested);
 	}
+
+	for(let n = 1; n <= props.pages; n++) {
+		pageItems.push(
+			<Pagination.Item disabled={n==pageNumber} onClick={handlePageClick} key={n} active={n == pageNumber}>
+				{n}
+			</Pagination.Item>
+		);
+	}
+
 
 	return (
 		<React.Fragment>
 			<div style={{
+				marginTop: '40px',
+				height: '700px',
 				display: 'flex',
-				justifyContent: 'center',
+				flexDirection: 'column',
+				justifyContent: 'flex-start',
 				alignItems: 'center',
 			}}>
+				<Pagination>
+				{pageItems}
+				</Pagination>
+	
+
 				<table style={{display: 'table', padding: '20px'}}>
-				{props.posts.map((key, index) => (
-				  
-				  validFile(key.slug) && (<tr key={index}>
-				   <td style={{padding: '20px',}}>
+				{props.posts[pageNumber-1].map((key, index) => (
+				<tr key={index}>
+					<td style={{padding: '20px'}}>
 				    <div style={{background: 'black'}}>
 				      <DateDiv>{key.slug}</DateDiv>
 				    </div>
 				   </td>
 				   
-				   <td style={{paddingRight: '10px', width: '300px'}}>
+					<td style={{paddingRight: '10px', width: '300px'}}>
 				    <TitleDiv onClick={
 					    () => {
 						    window.location.href = '/blog/post/' + 
@@ -90,7 +107,7 @@ function Blog(props) {
 				      by {key.author}
 				    </Typography>
 				   </td>
-				  </tr>)))}
+				  </tr>))}
 			         </table>
 			</div>
 		</React.Fragment>
@@ -121,11 +138,52 @@ export async function getStaticProps() {
     return data
   })(require.context('../../posts', true, /\.md$/))
 
+  function validFile(entry) {
+	  	var slugName = entry.slug;
+		var r = slugName.split('-');
+		if(r.length != 3) {
+			return false;
+		}
+
+	  	// Check if it's a valid ISO Date.
+		var year = Number(r[0]),
+		    month = Number(r[1]),
+		    day = Number(r[2]);
+
+		if(day > 31 || month > 12) {
+			return false;
+		}
+
+		return true;
+  }
+
+  function paginate(array, page_size, page_number) {
+  	return array.slice((page_number - 1) * page_size, page_number * page_size);
+  }
+
+  var r = [];
+  var workingPosts = posts.filter(validFile);
+  workingPosts.sort(function(a,b) {
+	const bd = new Date(b.slug);
+	const ad = new Date(a.slug);
+	return bd - ad;
+  });
+  
+
+  const page_size = 6;
+  const total_pages = Math.trunc(Number(posts.length / page_size)) + 1;
+
+  for(let n = 1; n <= total_pages; n++) {
+	  r.push(
+		paginate(workingPosts, page_size, n)
+	  );
+  }
+
   return {
     props: {
-      posts: posts,
+      pages: total_pages,
+      posts: r,
     },
   }
 }
-
 export default Blog;
