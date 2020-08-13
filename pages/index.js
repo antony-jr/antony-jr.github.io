@@ -136,7 +136,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center', paddingBottom: '100px',}}>
 					<Typography type='h4' font='Dosis Bold'>
-						<a href='' style={{color: 'black'}}>
+						<a href='/gpg.asc' style={{color: 'black'}} download>
 						Get GPG Public Key
 						</a>
 					</Typography>
