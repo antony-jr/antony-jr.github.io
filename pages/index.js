@@ -22,6 +22,7 @@ import Nav from 'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image'
 import CardColumns from 'react-bootstrap/CardColumns';
 import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
 import { SocialIcon } from 'react-social-icons';
 
@@ -50,10 +51,15 @@ const WrapperCol = styled(Col)`
 `;
 
 function BlogCard(props) {
+	const [hover, setHover] = React.useState(false);
+
 	return (
-	<Card 
-	  style={{margin: '10px'}}
-		bg={props.dark ? "dark" : ""} text={props.dark ? "white": "black"}
+	<Card
+	  onClick={() => {window.location.href=props.url}}
+	  onMouseEnter={()=> { setHover(true)}}
+	  onMouseLeave={()=> { setHover(false)}}
+		style={{margin: '10px', cursor: 'pointer', transition: 'all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)'}}
+		bg={props.dark ? (hover ? "primary" : "dark") : (hover ? "primary" : "")} text={props.dark ? "white" : "black"}
 		className={"text-center p-" + (typeof props.cardSize != 'undefined' ? props.cardSize : '2')}>
 		{props.image && <Card.Img variant="top" src={props.image}/>}
 	
@@ -61,11 +67,15 @@ function BlogCard(props) {
 	    <Card.Title>
 		    <Typography type={props.titleSize}>
 			    {props.title}
-		    </Typography>
+		    </Typography>   
+		    {props.badge && <Badge pill variant={props.dark ? "light" : "dark"}>
+			{props.badge}
+		    </Badge>}{' '}	
 	    </Card.Title>
 	    <Typography type='p'>
 		    {props.description}
 	    </Typography>
+	
       <footer className="blockquote-footer">
         <small className="text-muted">
 		<Typography type='h6'>
@@ -73,7 +83,7 @@ function BlogCard(props) {
 		</Typography>
 	</small>
       </footer>
-    </blockquote>
+   </blockquote>
 	  <Card.Footer>
 		  <small>
 		<Typography type='h6'>
@@ -116,9 +126,7 @@ function Index(props) {
 			</Typography>
 			<Typography
 				type='p'>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in iaculis mattis. Vestibulum nec gravida magna. Vivamus volutpat lacus non iaculis gravida. Nulla sollicitudin id nisl nec lacinia. Curabitur vel nisi nec erat pulvinar commodo. Ut nec eros nisl. Donec ut velit ac ante elementum semper. Ut vulputate, lectus eget porta tempus, orci arcu vestibulum velit, nec aliquet lacus nulla ac mi. Nam nec interdum turpis. Etiam bibendum nibh id augue sagittis, at mattis enim vestibulum. Donec malesuada eu nunc vel dictum. Cras vestibulum sollicitudin diam, molestie pulvinar mi commodo non. Nam sagittis est ut neque pretium, a elementum leo tristique. Suspendisse at mollis odio, in euismod orci.
-
+			<ReactMarkdown source={props.site.about} />
 			</Typography>
 
 				<div>
@@ -148,21 +156,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 					</Col>
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Fade>
 					<CardColumns>
 						{props.posts.map((key, index) =>
+						<Fade key={index}>
 						<BlogCard 
 							dark={key.dark}
 							title={key.title}
 							description={key.description}
 							date={key.date}
 							author={key.author}
+							badge={key.badge}
 							titleSize="h3"
 							cardSize={key.cardSize}
-						/>)
+						/>
+						</Fade>)
 						}
 					</CardColumns>
-					</Fade>
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
@@ -179,6 +188,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 					<Col style={{minWidth: '200px'}}>
+						<Fade>
 						<Typography type='p'>
 							This is my <b>primary key</b>, please follow this site to know if I change
 							my key which will not be that often. <br/>
@@ -187,22 +197,27 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend nisi in ia
 							If you want encrypted response then you must send your GPG public key first.
 
 						</Typography>
+						</Fade>
 					</Col>
 					<Col >
+						<Fade>
 						<pre style={{overflowY: 'hidden', overflowX: 'auto', backgroundColor: 'black', color: 'green', padding: '10px'}}>
 						{'pub   rsa4096/3156C8D324D12E73 2020-07-21 [SC]\n' +
 						 '      54AFD2B538FF0107631D72AE3156C8D324D12E73\n' +
 						 'uid                 [ultimate] J.R. Divya Antony <antonyjr@protonmail.com>\n' +
 						 'sub   rsa4096/0AF1A22AF304CE37 2020-07-21 [E]\n'}
 						</pre>
+						</Fade>
 					</Col>
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center', paddingBottom: '100px',}}>
+					<Zoom>
 					<Typography type='h4' font='Dosis Bold'>
 						<a href='/gpg.asc' style={{color: 'black'}} download>
 						Get GPG Public Key
 						</a>
 					</Typography>
+					</Zoom>
 				</Row>
 			</Container>
 		</React.Fragment>
@@ -233,6 +248,31 @@ export async function getStaticProps() {
     })
     return data
   })(require.context('../posts', true, /\.md$/))
+
+  const site = (context => {
+    const keys = context.keys()
+    const values = keys.map(context)
+
+    const data = keys.map((key, index) => {
+      // Create slug from filename
+      const slug = key
+        .replace(/^.*[\\\/]/, '')
+        .split('.')
+        .slice(0, -1)
+        .join('.')
+      const value = values[index]
+      // Parse yaml metadata & markdownbody in document
+      const document = matter(value.default)
+      return {
+	      frontmatter: document.data,
+	      markdownBody: document.content,
+	      slug
+      }
+    })
+    return data
+  })(require.context('../site', true, /\.md$/))
+
+
 
   function validFile(entry) {
 	  	var slugName = entry.slug;
@@ -284,9 +324,22 @@ export async function getStaticProps() {
 	  updates[n].date = getDate(updates[n]).toDateString();
   }
 
+  var about = null;
+  for(let n = 0; n < site.length; ++n) {
+	  if(site[n].slug == 'about') {
+		  about = site[n].markdownBody;
+		  break;
+	  }
+
+	  // More details will be added later
+  }
+
   return {
     props: {
       posts: updates,
+      site: {
+	 about: about,
+      }
     },
   }
 }

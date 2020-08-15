@@ -98,7 +98,7 @@ function Blog(props) {
 							                     key.slug;
 					    }
 					  }>
-				     {key.badge && <Badge pill variant="dark">
+					    {key.badge && <Badge pill variant={props.dark ? "white" : "dark"}>
 					      {key.badge}
 				      </Badge>}{' '}	
 					    {key.title}
