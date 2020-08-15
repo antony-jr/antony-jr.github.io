@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import React from 'react';
 import styled from 'styled-components';
 
@@ -99,6 +101,9 @@ function BlogCard(props) {
 function Index(props) {
 	return (
 		<React.Fragment>
+			<Head>
+				<title>antonyjr.in</title>
+			</Head>
 			<Container style={{marginTop: '40px',}} fluid='lg'>
 		
 				<Zoom>
