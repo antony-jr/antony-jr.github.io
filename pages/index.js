@@ -116,17 +116,18 @@ function Index(props) {
 					<Col sm={8}>
 			<Typography 
 				type='h2'font='Dosis Bold'>
-				<b>Hi., I'm Antony.</b>
+				<ReactMarkdown source={props.site.about.frontmatter.title}/>
 			</Typography>
 			<Typography
 				type='h3'>
-				I'm an <b>Open Source Developer</b> and <b>Aspiring Computer Scientist</b>.
-
+				<ReactMarkdown source={props.site.about.frontmatter.subtitle} />
+				{/*
+				I'm an <b>Open Source Developer</b> and <b>Aspiring Computer Scientist</b>.*/}
 				<br />	
 			</Typography>
 			<Typography
 				type='p'>
-			<ReactMarkdown source={props.site.about} />
+			<ReactMarkdown source={props.site.about.markdownBody} />
 			</Typography>
 
 				<div>
@@ -327,7 +328,8 @@ export async function getStaticProps() {
   var about = null;
   for(let n = 0; n < site.length; ++n) {
 	  if(site[n].slug == 'about') {
-		  about = site[n].markdownBody;
+		  about = site[n];
+		  
 		  break;
 	  }
 
