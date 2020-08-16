@@ -11,6 +11,11 @@ import Badge from 'react-bootstrap/Badge';
 import Pagination from 'react-bootstrap/Pagination'
 
 import Typography from '../../components/Typography.js';
+import FadeTop from '../../components/FadeTop.js';
+import FadeBottom from '../../components/FadeBottom.js';
+
+import { BsTag } from 'react-icons/bs';
+import { BsFillClockFill } from 'react-icons/bs';
 
 const BlogList = styled.div`
 	display: flex;
@@ -69,8 +74,9 @@ function Blog(props) {
 
 	return (
 		<React.Fragment>
+			<FadeTop/>
+			<div style={{backgroundColor: 'white', width: '100%'}}>
 			<div style={{
-				marginTop: '40px',
 				height: '700px',
 				display: 'flex',
 				flexDirection: 'column',
@@ -83,6 +89,7 @@ function Blog(props) {
 	
 
 				<table style={{display: 'table', padding: '20px'}}>
+				<tbody>
 				{props.posts[pageNumber-1].map((key, index) => (
 				<tr key={index}>
 					<td style={{padding: '20px'}}>
@@ -91,25 +98,34 @@ function Blog(props) {
 				    </div>
 				   </td>
 				   
-					<td style={{paddingRight: '10px', width: '300px'}}>
+					<td style={{paddingRight: '10px', width: '400px'}}>
 				    <TitleDiv onClick={
 					    () => {
 						    window.location.href = '/blog/post/' + 
 							                     key.slug;
 					    }
 					  }>
-					    {key.badge && <Badge pill variant={props.dark ? "white" : "dark"}>
-					      {key.badge}
-				      </Badge>}{' '}	
 					    {key.title}
 				    </TitleDiv>
-				    <Typography type='p'>
-				      by {key.author}
-				    </Typography>
+				    <div style={{width: '100%', display: 'flex'}}>
+					  <div style={{margin: '10px'}}>
+						  {key.tag && <Typography type='p' color='rgba(158,158,158 ,1)'>
+							  <BsTag/>{' ' + key.tag + ' '}
+						   </Typography>}
+					  </div>
+			  		  <div style={{margin: '10px'}}>
+						  {key.read && <Typography type='p' color='rgba(158,158,158 ,1)'>
+							<BsFillClockFill style={{verticalAlign: 'sub'}}/>{' ' + key.read + ' min read'}
+						   </Typography>}
+					  </div>	
+				    </div>
 				   </td>
 				  </tr>))}
+				</tbody>
 			         </table>
 			</div>
+			</div>
+			<FadeBottom/>
 		</React.Fragment>
 	);
 }

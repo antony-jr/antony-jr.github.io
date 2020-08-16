@@ -14,6 +14,16 @@ import Zoom from 'react-reveal/Zoom';
 
 import Typography from '../components/Typography.js';
 import AnimatedProfile from '../components/AnimatedProfile.js';
+import FadeTop from '../components/FadeTop.js';
+import FadeBottom from '../components/FadeBottom.js';
+
+// Blog Cards
+import CardGrid from '../components/CardGrid.js';
+import Card from '../components/Card.js';
+import CardArticle from '../components/CardArticle.js';
+import CardSpan from '../components/CardSpan.js';
+import CardThumb from '../components/CardThumb.js';
+
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -22,11 +32,13 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image'
-import CardColumns from 'react-bootstrap/CardColumns';
-import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
 
 import { SocialIcon } from 'react-social-icons';
+
+import { BsTag } from 'react-icons/bs';
+import { BsFillClockFill } from 'react-icons/bs';
+import { BsCalendarFill } from 'react-icons/bs';
+
 
 const SIcon = styled(SocialIcon)`
 	margin: 10px;
@@ -52,51 +64,59 @@ const WrapperCol = styled(Col)`
 	}
 `;
 
-function BlogCard(props) {
-	const [hover, setHover] = React.useState(false);
+function MainCard(props) {
+	if(props.size == 2) {
+		return (
+			<div style={{gridColumn: '1/span 2'}}>
+				{props.children}
+			</div>
+		);
+	}else {
+		return (
+			<div>
+				{props.children}
+			</div>
+		);
+	}
+}
 
+function BlogCard(props) {
 	return (
+		<MainCard size={props.cardSize}>
 	<Card
-	  onClick={() => {window.location.href=props.url}}
-	  onMouseEnter={()=> { setHover(true)}}
-	  onMouseLeave={()=> { setHover(false)}}
-		style={{margin: '10px', cursor: 'pointer', transition: 'all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)'}}
-		bg={props.dark ? (hover ? "primary" : "dark") : (hover ? "primary" : "")} text={props.dark ? "white" : "black"}
-		className={"text-center p-" + (typeof props.cardSize != 'undefined' ? props.cardSize : '2')}>
-		{props.image && <Card.Img variant="top" src={props.image}/>}
-	
-		<blockquote className="blockquote mb-0 card-body">
-	    <Card.Title>
-		    <Typography type={props.titleSize}>
-			    {props.title}
-		    </Typography>   
-		    {props.badge && <Badge pill variant={props.dark ? "light" : "dark"}>
-			{props.badge}
-		    </Badge>}{' '}	
-	    </Card.Title>
-	    <Typography type='p'>
-		    {props.description}
-	    </Typography>
-	
-      <footer className="blockquote-footer">
-        <small className="text-muted">
-		<Typography type='h6'>
-		{props.author}
+	  onClick={() => {window.location.href= '/blog/post/' + props.slug}}>
+	  <CardThumb src={props.slug}/>
+	   <CardArticle>
+		<Typography type='h4'>
+			 {props.title}
+		</Typography>   
+		<Typography type='p'>
+			{props.description}
 		</Typography>
-	</small>
-      </footer>
-   </blockquote>
-	  <Card.Footer>
-		  <small>
-		<Typography type='h6'>
-			<b>{props.date}</b>
-		</Typography>
-		</small>
-	  </Card.Footer>
-  </Card>
-	
+		   <div style={{width: '100%', display: 'flex'}}>
+			   {props.tag &&
+			   <div style={{margin: '10px'}}>
+			   	<Typography type='p' color='rgba(158,158,158 ,1)'>
+				<BsTag/>{' '}{props.tag}{' '}
+				</Typography>
+			   </div>
+			   }
+			{props.date && 
+			<div style={{margin: '10px'}}>
+			        <Typography type='p' color='rgba(158,158,158 ,1)'>
+					<BsCalendarFill style={{verticalAlign: 'sub'}}/>{' '}{props.date}
+				</Typography>
+			</div>}
+		   </div>
+		<CardSpan>
+			{props.author}
+		</CardSpan>
+	   </CardArticle>
+  	</Card>
+		</MainCard>
 	);
 }
+
 
 function Index(props) {
 	return (
@@ -104,36 +124,44 @@ function Index(props) {
 			<Head>
 				<title>antonyjr.in</title>
 			</Head>
-			<Container style={{marginTop: '40px',}} fluid='lg'>
+			<FadeTop/>
+			<div style={{width: '100%', backgroundColor: 'white'}}>
+			<Container fluid='lg'>
 		
-				<Zoom>
-				<Row style={{justifyContent: 'center', flexWrap: 'wrap-reverse'}}>
-					
+					<Row style={{justifyContent: 'center', flexWrap: 'wrap-reverse'}}>
+				
 					<WrapperCol> 
-					
+						<Fade>	
 			<AnimatedProfile
 				object1='/triangle.png'
 				object2='/triangle_inverted_white.png'
 				src='/me_rgb.png'/>
-	
+						</Fade>
 					</WrapperCol>
-	
+
 					<Col sm={8}>
 			<Typography 
 				type='h2'font='Dosis Bold'>
+				<Fade>
 				<ReactMarkdown source={props.site.about.frontmatter.title}/>
-			</Typography>
+				</Fade>
+				</Typography>
 			<Typography
 				type='h3'>
+				<Fade>
 				<ReactMarkdown source={props.site.about.frontmatter.subtitle} />
 				{/*
 				I'm an <b>Open Source Developer</b> and <b>Aspiring Computer Scientist</b>.*/}
-				<br />	
+				<br />
+				</Fade>
 			</Typography>
+						<Fade>
 			<Typography
 				type='p'>
 			<ReactMarkdown source={props.site.about.markdownBody} />
-			</Typography>
+				</Typography>
+						</Fade>
+						<Zoom>
 
 				<div>
 					<SIcon bgColor='black' url="https://twitter.com/antonyjr0"/>	
@@ -141,12 +169,10 @@ function Index(props) {
 					<SIcon bgColor='black' url="https://github.com/antony-jr"/>
 					<SIcon bgColor='black' url="mailto:antonyjr@protonmail.com"/>
 				</div>
-	
-			
+			</Zoom>
 				</Col>
 
 				</Row>
-				</Zoom>
 
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
@@ -161,23 +187,22 @@ function Index(props) {
 					<br/>
 					</Col>
 				</Row>
-				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
-					<CardColumns>
+				<Row>
+					<CardGrid>
 						{props.posts.map((key, index) =>
-						<Fade key={index}>
 						<BlogCard 
+							key={index}
 							dark={key.dark}
 							title={key.title}
 							description={key.description}
 							date={key.date}
 							author={key.author}
-							badge={key.badge}
-							titleSize="h3"
+							tag={key.tag}
+							slug={key.slug}
 							cardSize={key.cardSize}
-						/>
-						</Fade>)
+						/>)
 						}
-					</CardColumns>
+					</CardGrid>
 				</Row>
 				<Row style={{justifyContent: 'center', alignItems: 'center'}}>
 					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
@@ -208,15 +233,15 @@ function Index(props) {
 					<Col >
 						<Fade>
 						<pre style={{overflowY: 'hidden', overflowX: 'auto', backgroundColor: 'black', color: 'green', padding: '10px'}}>
-						{'pub   rsa4096/3156C8D324D12E73 2020-07-21 [SC]\n' +
+						{'pub   rsa4096/3156C8D324D12E73 2020-07-21\n' +
 						 '      54AFD2B538FF0107631D72AE3156C8D324D12E73\n' +
-						 'uid                 [ultimate] J.R. Divya Antony <antonyjr@protonmail.com>\n' +
-						 'sub   rsa4096/0AF1A22AF304CE37 2020-07-21 [E]\n'}
+						 'uid   J.R. Divya Antony <antonyjr@protonmail.com>\n' +
+						 'sub   rsa4096/0AF1A22AF304CE37 2020-07-21\n'}
 						</pre>
 						</Fade>
 					</Col>
 				</Row>
-				<Row style={{justifyContent: 'center', alignItems: 'center', paddingBottom: '100px',}}>
+				<Row style={{justifyContent: 'center', alignItems: 'center',}}>
 					<Zoom>
 					<Typography type='h4' font='Dosis Bold'>
 						<a href='/gpg.asc' style={{color: 'black'}} download>
@@ -225,7 +250,53 @@ function Index(props) {
 					</Typography>
 					</Zoom>
 				</Row>
+			
+					<Row style={{justifyContent: 'center', alignItems: 'center'}}>
+					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Zoom>
+						<br/>
+						<br/>
+					<Image
+					src="/contact_title.png" fluid/>
+					</Zoom>
+					<br/ >
+					<br/>
+					</Col>
+				</Row>
+					<Row style={{justifyContent: 'center', alignItems: 'center'}}>
+					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Zoom>
+						<Typography type='h5' style={{textAlign: 'left'}}>
+							<SIcon url="mailto:antonyjr@protonmail.com"/>
+							antonyjr@pm.me
+						</Typography>
+					</Zoom>
+					</Col>
+					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Zoom>
+						<Typography type='h5' style={{textAlign: 'left'}}>
+							<SIcon url="https://twitter.com/antonyjr0"/>	
+							@antonyjr0
+						</Typography>
+
+					
+					</Zoom>
+					</Col>
+					<Col style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+					<Zoom>
+						<Typography type='h5' style={{textAlign: 'left'}}>
+							<SIcon url="https://github.com/antony-jr/ama"/>	
+						AMA
+						</Typography>
+
+					
+					</Zoom>
+					</Col>
+	
+				</Row>
 			</Container>
+			</div>
+			<FadeBottom/>
 		</React.Fragment>
 	);
 }
@@ -319,10 +390,10 @@ export async function getStaticProps() {
   });
   
 
-  var updates = workingPosts.slice(0, 8); // Take up first 8 entries
+  var updates = workingPosts.slice(0, 7); // Take up first 8 entries
   for(let n = 0; n < updates.length; ++n) {
-	  var cardSize = 5 - n;
-	  if(cardSize < 2) {
+	  var cardSize = 1;
+	  if(n == 0) {
 		  cardSize = 2;
 	  }
 	  updates[n].cardSize = cardSize.toString();

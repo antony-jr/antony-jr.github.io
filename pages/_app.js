@@ -179,7 +179,7 @@ export default function MyApp({ Component, pageProps }) {
 
 		   </div>
 		   <footer
-			   style={{padding: '2rem', textAlign: 'center', width: '100%', background: 'white'}}>
+			   style={{padding: '2rem', textAlign: 'center', width: '100%'}}>
 		<div
 			style={{
 				display: 'flex',
