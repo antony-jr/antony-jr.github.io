@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
+    "prettify": "prettier --write components pages",
     "build": "next build",
     "start": "next build && next start"
   },
