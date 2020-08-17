@@ -3,27 +3,6 @@ body {
 	background-image: url('img-noise.png');
 }
 
-.BlogLink {
-  color: black;
-  text-decoration: none;
-}
-
-.BlogLink:link {
-  color: black;
-  text-decoration: none;
-}
-
-/* mouse over link */
-.BlogLink:hover {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  color: black;
-}
-
-.BlogLink:active {
-  color: black;
-}
-
 /*
  * Gradient Background
 body {

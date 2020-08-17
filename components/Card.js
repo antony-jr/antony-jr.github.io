@@ -8,7 +8,7 @@ const Card = styled.div`
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  margin: 20px;
 
   cursor: pointer;
   position: relative;

@@ -7,7 +7,7 @@ const CardArticle = styled.article`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 export default CardArticle;

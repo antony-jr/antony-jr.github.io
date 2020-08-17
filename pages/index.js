@@ -62,47 +62,53 @@ const WrapperCol = styled(Col)`
   }
 `;
 
-function MainCard(props) {
-  if (props.size == 2) {
-    return <div style={{ gridColumn: "1/span 2" }}>{props.children}</div>;
-  } else {
-    return <div>{props.children}</div>;
+const UpdatesFlex = styled.div`
+  flex: 1 1 auto;
+  width: 33.33333333333%;
+
+  @media (max-width: 600px) {
+    width: 50%;
   }
-}
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+`;
 
 function BlogCard(props) {
   return (
-    <MainCard size={props.cardSize}>
+    <Fade>
       <Card
         onClick={() => {
           window.location.href = "/blog/post/" + props.slug;
         }}
       >
-        <CardThumb src={props.slug} />
+        {props.imageProvided && <CardThumb src={props.slug} />}
         <CardArticle>
-          <Typography type="h4">{props.title}</Typography>
+          <Typography type="h4" font="Dosis Bold">
+            {props.title}
+          </Typography>
           <Typography type="p">{props.description}</Typography>
           <div style={{ width: "100%", display: "flex" }}>
             {props.tag && (
               <div style={{ margin: "10px" }}>
-                <Typography type="p" color="rgba(158,158,158 ,1)">
+                <Typography type="p" size="0.8rem">
                   <BsTag /> {props.tag}{" "}
                 </Typography>
               </div>
             )}
             {props.date && (
               <div style={{ margin: "10px" }}>
-                <Typography type="p" color="rgba(158,158,158 ,1)">
+                <Typography type="p" size="0.8rem">
                   <BsCalendarFill style={{ verticalAlign: "sub" }} />{" "}
                   {props.date}
                 </Typography>
               </div>
             )}
           </div>
-          <CardSpan>{props.author}</CardSpan>
         </CardArticle>
       </Card>
-    </MainCard>
+    </Fade>
   );
 }
 
@@ -161,27 +167,29 @@ function Index(props) {
             </Col>
           </Row>
 
-          <Row style={{ justifyContent: "center", alignItems: "center" }}>
-            <Col
-              style={{
-                textAlign: "center",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Zoom>
+          {props.posts.length > 0 && (
+            <Row style={{ justifyContent: "center", alignItems: "center" }}>
+              <Col
+                style={{
+                  textAlign: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Zoom>
+                  <br />
+                  <br />
+                  <Image src="/updates_title.png" fluid />
+                </Zoom>
                 <br />
-                <br />
-                <Image src="/updates_title.png" fluid />
-              </Zoom>
-              <br />
 
-              <br />
-            </Col>
-          </Row>
-          <Row>
-            <CardGrid>
-              {props.posts.map((key, index) => (
+                <br />
+              </Col>
+            </Row>
+          )}
+          <Row style={{ display: "flex", flexWrap: "wrap" }}>
+            <UpdatesFlex>
+              {props.posts.flex1.map((key, index) => (
                 <BlogCard
                   key={index}
                   dark={key.dark}
@@ -192,9 +200,42 @@ function Index(props) {
                   tag={key.tag}
                   slug={key.slug}
                   cardSize={key.cardSize}
+                  imageProvided={key.imageProvided}
                 />
               ))}
-            </CardGrid>
+            </UpdatesFlex>
+            <UpdatesFlex>
+              {props.posts.flex2.map((key, index) => (
+                <BlogCard
+                  key={index}
+                  dark={key.dark}
+                  title={key.title}
+                  description={key.description}
+                  date={key.date}
+                  author={key.author}
+                  tag={key.tag}
+                  slug={key.slug}
+                  cardSize={key.cardSize}
+                  imageProvided={key.imageProvided}
+                />
+              ))}
+            </UpdatesFlex>
+            <UpdatesFlex>
+              {props.posts.flex3.map((key, index) => (
+                <BlogCard
+                  key={index}
+                  dark={key.dark}
+                  title={key.title}
+                  description={key.description}
+                  date={key.date}
+                  author={key.author}
+                  tag={key.tag}
+                  slug={key.slug}
+                  cardSize={key.cardSize}
+                  imageProvided={key.imageProvided}
+                />
+              ))}
+            </UpdatesFlex>
           </Row>
           <Row style={{ justifyContent: "center", alignItems: "center" }}>
             <Col
@@ -408,7 +449,7 @@ export async function getStaticProps() {
     return bd - ad;
   });
 
-  var updates = workingPosts.slice(0, 7); // Take up first 8 entries
+  var updates = workingPosts.slice(0, 9); // Take up first 9 entries
   for (let n = 0; n < updates.length; ++n) {
     var cardSize = 1;
     if (n == 0) {
@@ -432,7 +473,12 @@ export async function getStaticProps() {
 
   return {
     props: {
-      posts: updates,
+      posts: {
+        length: updates.length,
+        flex1: updates.slice(0, 3),
+        flex2: updates.slice(3, 6),
+        flex3: updates.slice(6, 9),
+      },
       site: {
         about: about,
       },
