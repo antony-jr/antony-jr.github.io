@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const FadeTop = styled.div`
   width: 100%;
-  height: 100px;
-  background-image: linear-gradient(rgba(238, 238, 238, 0.3), white);
+  height: 70px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), white);
 `;
 
 export default FadeTop;

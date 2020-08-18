@@ -150,7 +150,6 @@ function Index(props) {
                   />
                   {/*
 				I'm an <b>Open Source Developer</b> and <b>Aspiring Computer Scientist</b>.*/}
-                  <br />
                 </Fade>
               </Typography>
               <Fade>

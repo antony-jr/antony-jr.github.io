@@ -104,7 +104,7 @@ function SocialIconSM(props) {
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [logoSwing, setLogoSwing] = React.useState(0);
-
+  
   const handleMouseOverLogo = () => {
     // TODO: Check if it's safe to do this.
     setLogoSwing(logoSwing + 1);
@@ -117,27 +117,20 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <React.Fragment>
         <Navbar>
-          <Navbar.Collapse className="justify-content-center">
-            <Navbar.Brand href="/">
-              <Swing spy={logoSwing}>
+	    <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+		    <a href='/'> 
+	     <Swing spy={logoSwing}>
                 <Image
                   fluid
                   onMouseOver={handleMouseOverLogo}
                   src="/ajr_logo.png"
-                  width="120px"
-                  height="120px"
+                  width="140px"
+                  height="140px"
                   className="d-inline-block align-top"
                 />
               </Swing>
-            </Navbar.Brand>
-          </Navbar.Collapse>
-          <Navbar.Toggle />
-          {/*
-  <Navbar.Collapse className="justify-content-end">
-    <Navbar.Text>
-      v0.0.1
-    </Navbar.Text>
-  </Navbar.Collapse>*/}
+	     </a>
+	  </div>
         </Navbar>
         <Navbar>
           <Navbar.Collapse className="justify-content-center">
@@ -163,7 +156,7 @@ export default function MyApp({ Component, pageProps }) {
           }}
         >
           <Component {...pageProps} />
-        </div>
+	</div>
         <footer style={{ padding: "2rem", textAlign: "center", width: "100%" }}>
           <div
             style={{
