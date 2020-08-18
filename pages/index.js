@@ -266,11 +266,11 @@ function Index(props) {
               <Fade>
                 <Typography type="p">
                   This is my <b>primary key</b>, please follow this site to know
-                  if I change my key which will not be that often. <br />
-                  You can encrypt sensitive data that you want to sent to me via
-                  email. I also will be using this key to sign all my data
-                  files. If you want encrypted response then you must send your
-                  GPG public key first.
+                  if I change my key which will not be that often. You can
+                  encrypt sensitive data that you want to sent to me via email.
+                  I also will be using this key to sign all my data files. If
+                  you want encrypted response then you must send your GPG public
+                  key first.
                 </Typography>
               </Fade>
             </Col>
