@@ -16,6 +16,7 @@ import styled from "styled-components";
 import Swing from "react-reveal/Swing";
 
 import Typography from "../components/Typography.js";
+import Loader from "../components/Loader.js";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -104,11 +105,20 @@ function SocialIconSM(props) {
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [logoSwing, setLogoSwing] = React.useState(0);
-  
+  const [loading, setLoading] = React.useState(true);
+
   const handleMouseOverLogo = () => {
     // TODO: Check if it's safe to do this.
     setLogoSwing(logoSwing + 1);
   };
+
+  React.useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -117,9 +127,16 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <React.Fragment>
         <Navbar>
-	    <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-		    <a href='/'> 
-	     <Swing spy={logoSwing}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <a href="/">
+              <Swing spy={logoSwing}>
                 <Image
                   fluid
                   onMouseOver={handleMouseOverLogo}
@@ -129,8 +146,8 @@ export default function MyApp({ Component, pageProps }) {
                   className="d-inline-block align-top"
                 />
               </Swing>
-	     </a>
-	  </div>
+            </a>
+          </div>
         </Navbar>
         <Navbar>
           <Navbar.Collapse className="justify-content-center">
@@ -156,7 +173,7 @@ export default function MyApp({ Component, pageProps }) {
           }}
         >
           <Component {...pageProps} />
-	</div>
+        </div>
         <footer style={{ padding: "2rem", textAlign: "center", width: "100%" }}>
           <div
             style={{
