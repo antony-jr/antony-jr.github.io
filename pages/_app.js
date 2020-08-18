@@ -160,7 +160,7 @@ export default function MyApp({ Component, pageProps }) {
                 Blog
               </TNavItem>
               <NavItemSeparator />
-              <TNavItem active={router.pathname == "/projects"}>
+              <TNavItem url="/projects" active={router.pathname == "/projects"}>
                 Projects
               </TNavItem>
             </Nav>
