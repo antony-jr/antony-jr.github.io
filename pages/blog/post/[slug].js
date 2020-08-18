@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
 
 import Typography from "../../../components/Typography.js";
 import FadeTop from "../../../components/FadeTop.js";
@@ -16,24 +17,30 @@ import { BsTag } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsCalendarFill } from "react-icons/bs";
 
-const ReactMarkdownStyles = styled.div`
+function Paragraph(props) {
+  return <Typography type="p">{props.children}</Typography>;
+}
+
+function Img(props) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Image fluid src={props.src} />
+    </div>
+  );
+}
+
+function Heading(props) {
+  return <Typography type="h3">{props.children}</Typography>;
+}
+
+const MarkdownRoot = styled.div`
   font-family: "Dosis Regular";
-
-  h1 {
-    font-family: "Dosis Regular";
-
-    @media (max-width: 331px) {
-      font-size: 0.5rem;
-    }
-
-    @media (max-width: 191px) {
-      font-size: 0.2rem;
-    }
-  }
-
-  p {
-    font-family: "Dosis Regular";
-  }
 `;
 
 function Post(props) {
@@ -95,9 +102,15 @@ function Post(props) {
             }}
           >
             <Col style={{ maxWidth: "80%" }}>
-              <ReactMarkdownStyles>
-                <ReactMarkdown source={props.markdownBody} />
-              </ReactMarkdownStyles>
+              <ReactMarkdown
+                renderers={{
+                  paragraph: Paragraph,
+                  image: Img,
+                  heading: Heading,
+                  root: MarkdownRoot,
+                }}
+                source={props.markdownBody}
+              />
             </Col>
           </Row>
           <Row
@@ -109,7 +122,10 @@ function Post(props) {
           >
             <Col>
               {props.prevPost && (
-                <a className="BlogLink" href="/">
+                <a
+                  className="BlogLink"
+                  href={"/blog/post/" + props.prevPost.slugName}
+                >
                   <Typography type="h4" font="Dosis Bold">
                     Previous
                   </Typography>
@@ -129,7 +145,10 @@ function Post(props) {
               }}
             >
               {props.nextPost && (
-                <a className="BlogLink" href="/">
+                <a
+                  className="BlogLink"
+                  href={"/blog/post/" + props.nextPost.slugName}
+                >
                   <Typography type="h4" font="Dosis Bold">
                     Next
                   </Typography>

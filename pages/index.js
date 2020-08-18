@@ -106,6 +106,11 @@ function BlogCard(props) {
               </div>
             )}
           </div>
+          {props.imageCopyright && (
+            <Typography type="p" size="0.9rem">
+              Image (c) {props.imageCopyright}
+            </Typography>
+          )}
         </CardArticle>
       </Card>
     </Fade>
@@ -201,6 +206,7 @@ function Index(props) {
                   slug={key.slug}
                   cardSize={key.cardSize}
                   imageProvided={key.imageProvided}
+                  imageCopyright={key.imageCopyright}
                 />
               ))}
             </UpdatesFlex>
@@ -217,6 +223,7 @@ function Index(props) {
                   slug={key.slug}
                   cardSize={key.cardSize}
                   imageProvided={key.imageProvided}
+                  imageCopyright={key.imageCopyright}
                 />
               ))}
             </UpdatesFlex>
@@ -233,6 +240,7 @@ function Index(props) {
                   slug={key.slug}
                   cardSize={key.cardSize}
                   imageProvided={key.imageProvided}
+                  imageCopyright={key.imageCopyrigh}
                 />
               ))}
             </UpdatesFlex>
