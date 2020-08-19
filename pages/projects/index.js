@@ -12,18 +12,63 @@ import Typography from "../../components/Typography.js";
 import FadeTop from "../../components/FadeTop.js";
 import FadeBottom from "../../components/FadeBottom.js";
 
+import CardGrid from "../../components/CardGrid.js";
+import Card from "../../components/Card.js";
+import CardArticle from "../../components/CardArticle.js";
+import CardSpan from "../../components/CardSpan.js";
+import CardThumb from "../../components/CardThumb.js";
+
+
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import Image from "react-bootstrap/Image";
-import Carousel from "react-bootstrap/Carousel";
 
 const MarkdownStyles = styled.div`
   font-family: "Dosis Regular";
 `;
 
+function ProjectCard(props) {
+  return (
+    <Zoom>
+      <Card
+        onClick={() => {
+          window.location.href = props.url;
+        }}
+      >
+        {props.image && <CardThumb src={props.image} />}
+        <CardArticle>
+          <Typography type="h2" font="Dosis Bold">
+            {props.title}
+          </Typography>
+	<ReactMarkdown renderers={{root: MarkdownStyles}} source={props.description}/>
+        </CardArticle>
+      </Card>
+    </Zoom>
+  );
+}
+
+
+
+const ProjectFlex = styled.div`
+  flex: 1 1 auto;
+  width: 33.33333333333%;
+
+  @media (max-width: 600px) {
+    width: 50%;
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+`;
+
+
+
 function Projects(props) {
+
   return (
     <React.Fragment>
       <Head>
@@ -32,40 +77,47 @@ function Projects(props) {
       <FadeTop />
       <div style={{ width: "100%", backgroundColor: "white" }}>
         <Container fluid="lg">
-          <Row style={{ justifyContent: "center", alignItems: "center" }}>
-            <Col>
-              <Carousel>
-                {props.projects.map((key, index) => (
-                  <Carousel.Item>
-                    <Image
-                      fluid
-                      className="d-block w-100"
-                      src={key.frontmatter.image}
-                    />
-                    <Carousel.Caption>
-                      <Typography type="h1" font="Dosis Bold">
-                        {key.frontmatter.projectName}
-                      </Typography>
-                      <ReactMarkdown
-                        renders={{
-                          root: MarkdownStyles,
-                        }}
-                        source={key.markdownBody}
-                      />
-                      <a
-                        className="BlogLink"
-                        href={key.frontmatter.url}
-                        style={{ color: "white" }}
-                      >
-                        <Typography type="h3">Project Page</Typography>
-                      </a>
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-            </Col>
+         <Row style={{ display: "flex", flexWrap: "wrap" }}>
+		 {props.projects.flex1 && <ProjectFlex>
+              {props.projects.flex1.map((key, index) => (
+                <ProjectCard
+                  key={index}
+                  title={key.frontmatter.title}
+                  description={key.markdownBody}
+                  slug={key.slug}
+	          image={key.frontmatter.image}
+	          url={key.frontmatter.url}
+		/>
+              ))}
+            </ProjectFlex>}
+		 {props.projects.flex2 && 
+		 <ProjectFlex>
+              {props.projects.flex2.map((key, index) => (
+                <ProjectCard
+                  key={index}
+                  title={key.frontmatter.title}
+                  description={key.markdownBody}
+                  slug={key.slug}
+	          image={key.frontmatter.image}
+		  url={key.frontmatter.url}
+		/>
+              ))}
+            </ProjectFlex>}
+		 {props.projects.flex3 &&
+		 <ProjectFlex>
+              {props.projects.flex3.map((key, index) => (
+                <ProjectCard
+                  key={index}
+                  title={key.frontmatter.title}
+                  description={key.markdownBody}
+                  slug={key.slug}
+	          image={key.frontmatter.image}
+			url={key.frontmatter.url}
+		/>
+              ))}
+            </ProjectFlex>}
           </Row>
-        </Container>
+	</Container>
       </div>
       <FadeBottom />
     </React.Fragment>
@@ -99,7 +151,11 @@ export async function getStaticProps() {
 
   return {
     props: {
-      projects: posts,
+     projects: {
+      flex1: posts.slice(0, 6),
+      flex2: posts.slice(6, 12), 
+      flex2: posts.slice(12, 18),
+     }
     },
   };
 }
