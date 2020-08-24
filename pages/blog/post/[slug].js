@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 import React from "react";
 import styled from "styled-components";
@@ -19,7 +19,7 @@ import { BsTag } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsCalendarFill } from "react-icons/bs";
 
-import { Tweet } from 'react-twitter-widgets'
+import { Tweet } from "react-twitter-widgets";
 
 function Paragraph(props) {
   return <Typography type="p">{props.children}</Typography>;
@@ -48,43 +48,54 @@ const MarkdownRoot = styled.div`
 `;
 
 function TweetCard(props) {
- 	const [display, setDisplay] = React.useState(false);
-	const [flex, setFlex] = React.useState('flex');
+  const [display, setDisplay] = React.useState(false);
+  const [flex, setFlex] = React.useState("flex");
 
-	return (<React.Fragment>
-		<Tweet tweetId={props.value} onLoad={()=>{setInterval(()=>{setDisplay(true)}, 100);}}/>
-		{!display && 
-		  <div 
-			style={{width: '100%', 
-				textAlign: 'center'}}>
-					<Typography type='h4'>
-					<b>Tweet ID:</b> {props.value}
-					</Typography>
-		 </div>}
-	</React.Fragment>)
+  return (
+    <React.Fragment>
+      <Tweet
+        tweetId={props.value}
+        onLoad={() => {
+          setInterval(() => {
+            setDisplay(true);
+          }, 100);
+        }}
+      />
+      {!display && (
+        <div style={{ width: "100%", textAlign: "center" }}>
+          <Typography type="h4">
+            <b>Tweet ID:</b> {props.value}
+          </Typography>
+        </div>
+      )}
+    </React.Fragment>
+  );
 }
 
 const renderers = {
-    paragraph: Paragraph,
-    image: Img,
-    heading: Heading,
-    root: MarkdownRoot,
-    code: ({ language, value }) => {
-       if (language === 'tweet') {
-	       return <TweetCard value={value}/>
-       }
-       const className = language && `language-${language}`
-       const code = React.createElement(
-	                   'code', className ? { className: className } : null, value)
-       return React.createElement('pre', {}, code)
+  paragraph: Paragraph,
+  image: Img,
+  heading: Heading,
+  root: MarkdownRoot,
+  code: ({ language, value }) => {
+    if (language === "tweet") {
+      return <TweetCard value={value} />;
     }
-}
+    const className = language && `language-${language}`;
+    const code = React.createElement(
+      "code",
+      className ? { className: className } : null,
+      value
+    );
+    return React.createElement("pre", {}, code);
+  },
+};
 
 function Post(props) {
   return (
     <React.Fragment>
       <Head>
-	      <title>{props.frontmatter.title}</title>
+        <title>{props.frontmatter.title}</title>
       </Head>
       <FadeTop />
       <div style={{ backgroundColor: "white", width: "100%" }}>
@@ -144,9 +155,9 @@ function Post(props) {
             <Col style={{ maxWidth: "80%" }}>
               <ReactMarkdown
                 renderers={renderers}
-		source={props.markdownBody}
-		escapeHtml={false}
-	     />
+                source={props.markdownBody}
+                escapeHtml={false}
+              />
             </Col>
           </Row>
           <Row
