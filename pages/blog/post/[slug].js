@@ -49,14 +49,10 @@ const MarkdownRoot = styled.div`
 
 function TweetCard(props) {
  	const [display, setDisplay] = React.useState(false);
+	const [flex, setFlex] = React.useState('flex');
 
 	return (<React.Fragment>
-	         <div style={{width: '100%', textAlign: 'center'}}>
-			<div style={{display: 'inline-block'}}>
-				<Tweet tweetId={props.value} onLoad={()=>{setInterval(()=>{setDisplay(true)}, 100);}}/>
-			</div>
-		 </div>
-
+		<Tweet tweetId={props.value} onLoad={()=>{setInterval(()=>{setDisplay(true)}, 100);}}/>
 		{!display && 
 		  <div 
 			style={{width: '100%', 
@@ -149,6 +145,7 @@ function Post(props) {
               <ReactMarkdown
                 renderers={renderers}
 		source={props.markdownBody}
+		escapeHtml={false}
 	     />
             </Col>
           </Row>

@@ -107,6 +107,16 @@ export default function MyApp({ Component, pageProps }) {
   const [logoSwing, setLogoSwing] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
 
+  const getTitle = () => {
+	  if(router.pathname == '/blog') {
+		  return "antonyjr.in | Blog";
+	  }else if(router.pathname == '/projects') {
+		  return "antonyjr.in | Projects"
+	  }else {
+		  return "antonyjr.in"
+	  }
+  }
+
   const handleMouseOverLogo = () => {
     // TODO: Check if it's safe to do this.
     setLogoSwing(logoSwing + 1);
@@ -124,6 +134,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	      <title>{getTitle()}</title>
       </Head>
       <React.Fragment>
         <Navbar>
