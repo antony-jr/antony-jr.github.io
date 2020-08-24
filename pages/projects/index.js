@@ -6,7 +6,7 @@ import styled from "styled-components";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 
-import Zoom from "react-reveal/Zoom";
+import Fade from "react-reveal/Fade";
 
 import Typography from "../../components/Typography.js";
 import FadeTop from "../../components/FadeTop.js";
@@ -26,27 +26,79 @@ import Col from "react-bootstrap/Col";
 
 import Image from "react-bootstrap/Image";
 
+import Button from "react-bootstrap/Button";
+
 const MarkdownStyles = styled.div`
   font-family: "Dosis Regular";
 `;
 
-function ProjectCard(props) {
+const CenterWhenMobile = styled.div`
+  text-align: left;
+
+  @media (max-width: 576px) {
+     text-align: center;
+  }
+
+`;
+
+function VerticalLine(props) {
+	console.log(props.index);
+	console.log(props.length);
+    if(props.index + 1 != props.length) {
+	    return (
+		    <Row style={{marginTop: '40px', marginBottom: '40px'}}>
+    <Col 
+     style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+		    <Image
+		     fluid
+		     width="150px"
+		     height="150px"
+		     src='/vertical_line.png'/>
+	    </Col>
+    </Row>
+ 
+	    );
+    }else {
+	    return (<div/>);
+    }
+}
+
+function ProjectEntry(props) {
   return (
-    <Zoom>
-      <Card
-        onClick={() => {
-          window.location.href = props.url;
-        }}
-      >
-        {props.image && <CardThumb src={props.image} />}
-        <CardArticle>
-          <Typography type="h2" font="Dosis Bold">
-            {props.title}
-          </Typography>
-	<ReactMarkdown renderers={{root: MarkdownStyles}} source={props.description}/>
-        </CardArticle>
-      </Card>
-    </Zoom>
+    <Fade>
+    <Row>
+	    <Col sm={6}
+style={{display: 'flex', flexDirection: 'column',
+			       flexWrap: 'wrap',
+	justifyContent: 'center', alignItems: 'center'}}>		 
+		    <Image
+		     fluid
+		     width={props.imageWidth ? props.imageWidth : 'auto'}
+			    height={props.imageHeight ? props.imageHeight : 'auto'}
+		     src={props.image}
+		    />
+	    </Col>
+	    <Col sm={6} style={{display: 'flex', flexDirection: 'column',
+			       flexWrap: 'wrap',
+			       justifyContent: 'center'}}>
+		  <CenterWhenMobile>
+		  <Typography type='h1' font='Dosis Bold'>
+			    {props.title}
+		  </Typography>
+		  <ReactMarkdown 
+			 renderers={{root: MarkdownStyles}}
+			 source={props.markdown}/>
+	          <Button variant="outline-dark" 
+			  onClick={()=> {window.open(props.url,"_blank");}}>
+		  <Typography type='h5' font='Dosis Regular'>
+		      Project Page
+		  </Typography>
+		  </Button>
+		  </CenterWhenMobile>
+	    </Col>
+    </Row>
+	    <VerticalLine index={props.index} length={props.length}/>
+    </Fade>
   );
 }
 
@@ -77,46 +129,22 @@ function Projects(props) {
       <FadeTop />
       <div style={{ width: "100%", backgroundColor: "white" }}>
         <Container fluid="lg">
-         <Row style={{ display: "flex", flexWrap: "wrap" }}>
-		 {props.projects.flex1 && <ProjectFlex>
-              {props.projects.flex1.map((key, index) => (
-                <ProjectCard
-                  key={index}
-                  title={key.frontmatter.title}
-                  description={key.markdownBody}
-                  slug={key.slug}
-	          image={key.frontmatter.image}
-	          url={key.frontmatter.url}
-		/>
-              ))}
-            </ProjectFlex>}
-		 {props.projects.flex2 && 
-		 <ProjectFlex>
-              {props.projects.flex2.map((key, index) => (
-                <ProjectCard
-                  key={index}
-                  title={key.frontmatter.title}
-                  description={key.markdownBody}
-                  slug={key.slug}
-	          image={key.frontmatter.image}
-		  url={key.frontmatter.url}
-		/>
-              ))}
-            </ProjectFlex>}
-		 {props.projects.flex3 &&
-		 <ProjectFlex>
-              {props.projects.flex3.map((key, index) => (
-                <ProjectCard
-                  key={index}
-                  title={key.frontmatter.title}
-                  description={key.markdownBody}
-                  slug={key.slug}
-	          image={key.frontmatter.image}
-			url={key.frontmatter.url}
-		/>
-              ))}
-            </ProjectFlex>}
-          </Row>
+		{props.projects.length > 0 ? 
+			(props.projects.map((key, index) => 
+			<ProjectEntry 
+			    key={index}
+			    index={index}
+			    length={props.projects.length}
+			    url={key.frontmatter.url}
+			    markdown={key.markdownBody}
+			    title={key.frontmatter.title}
+			    image={key.frontmatter.image}
+			    imageWidth={key.frontmatter.imageWidth}
+			    imageHeight={key.frontmatter.imageHeight}
+				/>
+			))
+		: null
+		}
 	</Container>
       </div>
       <FadeBottom />
@@ -151,12 +179,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-     projects: {
-      flex1: posts.slice(0, 6),
-      flex2: posts.slice(6, 12), 
-      flex2: posts.slice(12, 18),
-     }
-    },
+     projects: posts, 
+     },
   };
 }
 
