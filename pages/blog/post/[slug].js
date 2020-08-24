@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import React from "react";
 import styled from "styled-components";
 
@@ -16,6 +18,8 @@ import ReactMarkdown from "react-markdown";
 import { BsTag } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsCalendarFill } from "react-icons/bs";
+
+import { Tweet } from 'react-twitter-widgets'
 
 function Paragraph(props) {
   return <Typography type="p">{props.children}</Typography>;
@@ -43,9 +47,49 @@ const MarkdownRoot = styled.div`
   font-family: "Dosis Regular";
 `;
 
+function TweetCard(props) {
+ 	const [display, setDisplay] = React.useState(false);
+
+	return (<React.Fragment>
+	         <div style={{width: '100%', textAlign: 'center'}}>
+			<div style={{display: 'inline-block'}}>
+				<Tweet tweetId={props.value} onLoad={()=>{setInterval(()=>{setDisplay(true)}, 100);}}/>
+			</div>
+		 </div>
+
+		{!display && 
+		  <div 
+			style={{width: '100%', 
+				textAlign: 'center'}}>
+					<Typography type='h4'>
+					<b>Tweet ID:</b> {props.value}
+					</Typography>
+		 </div>}
+	</React.Fragment>)
+}
+
+const renderers = {
+    paragraph: Paragraph,
+    image: Img,
+    heading: Heading,
+    root: MarkdownRoot,
+    code: ({ language, value }) => {
+       if (language === 'tweet') {
+	       return <TweetCard value={value}/>
+       }
+       const className = language && `language-${language}`
+       const code = React.createElement(
+	                   'code', className ? { className: className } : null, value)
+       return React.createElement('pre', {}, code)
+    }
+}
+
 function Post(props) {
   return (
     <React.Fragment>
+      <Head>
+	      <title>{props.frontmatter.title}</title>
+      </Head>
       <FadeTop />
       <div style={{ backgroundColor: "white", width: "100%" }}>
         <Container fluid="md">
@@ -103,14 +147,9 @@ function Post(props) {
           >
             <Col style={{ maxWidth: "80%" }}>
               <ReactMarkdown
-                renderers={{
-                  paragraph: Paragraph,
-                  image: Img,
-                  heading: Heading,
-                  root: MarkdownRoot,
-                }}
-                source={props.markdownBody}
-              />
+                renderers={renderers}
+		source={props.markdownBody}
+	     />
             </Col>
           </Row>
           <Row
