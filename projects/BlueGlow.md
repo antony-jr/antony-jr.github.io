@@ -1,7 +1,7 @@
 ---
 image: "blueglow.png"
 title: Blue Glow
-url: https://github.com/antony-jr/BlueGlow
+url: https://github.com/antony-jr/blue-glow
 ---
 
 Blue Glow is a Qt/QML C++ system tray application that can notify the user when 
