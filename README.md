@@ -1,3 +1,4 @@
 # website
-Source for my official website.
+
+Source for my official website and blog.
 
