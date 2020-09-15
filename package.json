@@ -10,7 +10,8 @@
     "dev": "next",
     "prettify": "prettier --write components pages",
     "build": "next build",
-    "start": "next build && next start"
+    "start": "next build && next start",
+    "export": "next export"
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
