@@ -11,10 +11,12 @@
     "prettify": "prettier --write components pages",
     "build": "next build",
     "start": "next build && next start",
-    "export": "next export"
+    "export": "next export",
+    "sitemap": "node scripts/generate_sitemap.js"
   },
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "globby": "^11.0.2",
     "gray-matter": "^4.0.2",
     "next": "^9.5.1",
     "raw-loader": "^4.0.1",
@@ -27,6 +29,7 @@
     "react-reveal": "^1.2.2",
     "react-social-icons": "^4.1.0",
     "react-twitter-widgets": "^1.9.5",
+    "sitemap": "^6.3.5",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
