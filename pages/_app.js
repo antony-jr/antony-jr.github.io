@@ -194,7 +194,7 @@ export default function MyApp({ Component, pageProps }) {
               alignItems: "center",
             }}
           >
-            <Typography type="h6">{"\u00A9 "}2020 Antony Jr.</Typography>
+            <Typography type="h6">{"\u00A9 "}2021 Antony Jr.</Typography>
 
             <div>
               <SocialIconSM url="https://twitter.com/antonyjr0" />
