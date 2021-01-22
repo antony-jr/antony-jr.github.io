@@ -194,8 +194,17 @@ export async function getStaticProps() {
     return bd - ad;
   });
 
-  const page_size = 6;
-  const total_pages = Math.trunc(Number(posts.length / page_size)) + 1;
+  const page_size = 6; /// Set the page size here.
+
+  var total_pages = posts.length / page_size;
+  /// Check if the total pages has a decimal part if it does then just add 1
+  /// Note: We can't use ceil or floor here because the decimal part means we just
+  ///       need an extra page. 
+
+  if(total_pages % 1 != 0) {
+	  total_pages += 1;
+  }
+  total_pages = Math.trunc(Number(total_pages));
 
   for (let n = 1; n <= total_pages; n++) {
     r.push(paginate(workingPosts, page_size, n));
