@@ -1,16 +1,24 @@
-import { Box, Stack, Image } from "@chakra-ui/react";
+import React from "react";
+import { Image, Box, Stack} from "@chakra-ui/react";
 
-export default function ProfileImage({src="me_rgb.png", ...rest}) {
+function ProfileImage(props) {
   return (
-     <Box style={{backgroundImage: "linear-gradient(#212121, black)"}} maxW="md" borderWidth="1px" borderRadius="lg">
-      <Stack align="center" p="4" justify="center" direction="column">
-	 <Image  src={src} {...rest} alt="Antony Jr." 
-       	   borderRadius="lg"
-	   w={["240px", "420px", "420px", "610px", "610px"]} 
-       	   h="auto"
-	   opacity="0.7"
-	   />
-       </Stack>
+     <Box p="2" bg="white" shadow="2xl">
+	<Box
+	   borderRadius="lg"
+	   bg="#212121"
+	   as="div"
+	>
+	
+	   <Image src={props.src}
+	  borderRadius="lg"
+	  w={["240px", "410px", "410px", "500px", "500px"]}
+	  h="auto"
+	  opacity="0.7"
+       />
+	</Box>
     </Box>
   );
 }
+
+export default ProfileImage;

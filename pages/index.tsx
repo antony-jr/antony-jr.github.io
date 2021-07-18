@@ -1,4 +1,5 @@
 import Head from "next/head";
+import dynamic from 'next/dynamic'
 
 import {
   Text,
@@ -13,7 +14,9 @@ import {
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 
-import ProfileImage from "../components/ProfileImage";
+const DAnimatedProfile = dynamic(() => import('../components/AnimatedProfile'))
+
+///import AnimatedProfile from "../components/AnimatedProfile";
 
 function Title({children, ...rest}) {
    return (
@@ -30,11 +33,19 @@ function SubTitle({children, ...rest}) {
       </Text>);
 }
 
+function BodyText({children, ...rest}) {
+   return (
+      <Text fontSize="md" {...rest}>
+	 {children}
+      </Text>
+   );
+}
+
 export default function Index(props) {
    return (
       <>
 	 <Head>
-	    <title>antonyjr.in</title>>
+	    <title>antonyjr.in</title>
 	 </Head>
 	 <Box mb={0}>
 	    <Box id="home" as="section" pb={{ base: "2rem", md: "5rem" }}>
@@ -45,7 +56,11 @@ export default function Index(props) {
                justify="space-between"
                direction={["column-reverse", "column-reverse", "row-reverse", "row-reverse"]}
               >
-	      <ProfileImage/>
+	
+		 <DAnimatedProfile
+                  object1="/triangle.png"
+		  object2="/triangle_inverted_white.png"
+                  src="/me_rgb.png"/>
 
 	      <Box textAlign="left">
 		 <ReactMarkdown components={{p: Title}}>
@@ -55,7 +70,7 @@ export default function Index(props) {
 		    	{props.site.about.frontmatter.subtitle} 
 		 </ReactMarkdown>
 		 <br/>
-		 <ReactMarkdown as={Text}>
+		 <ReactMarkdown components={{p: BodyText}}>
 		    	{props.site.about.markdownBody} 
 		 </ReactMarkdown>
 	      </Box>
@@ -82,6 +97,8 @@ export async function getStaticProps() {
         .join(".");
       const value = values[index];
       // Parse yaml metadata & markdownbody in document
+      // Side Note: I have no idea why typescript errors out.
+      // @ts-ignore
       const document = matter(value.default);
       return {
         ...document.data,
@@ -104,6 +121,7 @@ export async function getStaticProps() {
         .join(".");
       const value = values[index];
       // Parse yaml metadata & markdownbody in document
+      // @ts-ignore
       const document = matter(value.default);
       return {
         frontmatter: document.data,
@@ -147,19 +165,20 @@ export async function getStaticProps() {
 
   var workingPosts = posts.filter(validFile);
   workingPosts.sort(function (a, b) {
-    const bd = new Date(b.slug);
-    const ad = new Date(a.slug);
-    return bd - ad;
+    return +new Date(b.slug) - +new Date(a.slug);
   });
 
-  var updates = workingPosts.slice(0, 9); // Take up first 9 entries
+  var updates = workingPosts.slice(0, 9); // Take up first 9 entries. 
   for (let n = 0; n < updates.length; ++n) {
     var cardSize = 1;
     if (n == 0) {
       cardSize = 2;
     }
+    // @ts-ignore 
     updates[n].cardSize = cardSize.toString();
+    // @ts-ignore
     updates[n].dark = Math.random() >= 0.5;
+    // @ts-ignore
     updates[n].date = getDate(updates[n]).toDateString();
   }
 

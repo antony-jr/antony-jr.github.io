@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 import {
   ChakraProvider,
@@ -20,7 +21,10 @@ import "@fontsource/dosis";
 import { extendTheme, useDisclosure } from "@chakra-ui/react";
 import { AnimatedSocialIcon } from "react-animated-social-icons";
 
-import Logo from "../components/Logo";
+
+const Logo = dynamic(() => import('../components/Logo'));
+
+//import Logo from "../components/Logo";
 import MenuToggle from "../components/MenuToggle";
 import MenuItem from "../components/MenuItem";
 import DrawerMenuItem from "../components/DrawerMenuItem";
