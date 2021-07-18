@@ -21,6 +21,7 @@ function AnimatedProfile(props) {
   const animate = {
     blackSquare: {
       yoyo: true,
+      repeat: -1,
       loop: true,
       y: 30,
       duration: 3000,
@@ -29,6 +30,7 @@ function AnimatedProfile(props) {
     whiteSquare: {
       yoyo: true,
       loop: true,
+      repeat: -1,
       y: 40,
       duration: 4000,
       delay: 200,
@@ -60,10 +62,7 @@ function AnimatedProfile(props) {
   }
 
   return (
-    <Box
-       w={["230px", "300px", "550px", "600px", "900px", "900px"]}	  
-       h="auto"
-    >
+    <Box w={["230px", "300px", "550px", "600px", "900px", "900px"]} h="auto">
       <ShadowSvg viewBox="0 0 480 500">
         <g stroke="none" strokeWidth="1" fill="white" fillRule="evenodd">
           <g id="Group-22" transform="translate(0,40)">

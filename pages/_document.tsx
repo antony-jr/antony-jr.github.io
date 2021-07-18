@@ -10,7 +10,7 @@ class MainDoc extends Document {
     return (
       <Html lang="en">
         <Head>
-	  <meta charSet="utf-8" />
+          <meta charSet="utf-8" />
           <meta property="og:title" content="antonyjr.in" key="title" />
           <meta
             name="description"

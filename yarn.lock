@@ -2926,11 +2926,6 @@ rc-tween-one@^2.7.3:
     style-utils "~0.2.0"
     tween-functions "~1.2.0"
 
-react-animated-social-icons@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-animated-social-icons/-/react-animated-social-icons-1.1.0.tgz#8b0aff71820e96eadef6c8624aea627ee5d4925d"
-  integrity sha512-TM1taeasC4Adl5kfOMTdnq5O44C+v4KQtk50hHDJ1Mp2jbWkMSR7zkvn4eaofoaTdrp7KA+d2dl3uuXbej3RdA==
-
 react-clientside-effect@^1.2.2:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.5.tgz#e2c4dc3c9ee109f642fac4f5b6e9bf5bcd2219a3"
@@ -3033,6 +3028,13 @@ react-reveal@^1.2.2:
   integrity sha512-JCv3fAoU6Z+Lcd8U48bwzm4pMZ79qsedSXYwpwt6lJNtj/v5nKJYZZbw3yhaQPPgYePo3Y0NOCoYOq/jcsisuw==
   dependencies:
     prop-types "^15.5.10"
+
+react-social-icons@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-5.5.1.tgz#dcac503c91f25737e2dcd90f69489401c972e417"
+  integrity sha512-JBq4dbtthfN+PSUOw4mCu8VDvx+tCce3GcGlAb0xipfd4xmwwVBTLLYpNhkYcMFfCyK6E75XHeY/EwvIRdYJiA==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-style-singleton@^2.1.0:
   version "2.1.1"
