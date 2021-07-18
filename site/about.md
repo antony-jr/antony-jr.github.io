@@ -9,4 +9,7 @@ My primary interest lies in **Theoretical Computer Science** and **Artificial Ge
 Even though I like programming and open source work, My life long quest will always be research
 and implementing my research. 
 
+&nbsp;
+
 I love to watch Animes all day. 
+
