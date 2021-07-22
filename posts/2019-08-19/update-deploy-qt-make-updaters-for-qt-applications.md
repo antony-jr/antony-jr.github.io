@@ -2,7 +2,7 @@
 author: Antony Jr.
 title: "Update Deploy Qt: Making updaters for Qt Application with a single command"
 description: "Future plans for Update Deploy Qt, A project that aims to make updater for Qt Application with less code as possible, ideally with a single command"
-imageProvided: true
+image: "/blog-posts-assets/2019-08-19.png"
 tag: Dev Tools
 read: 5
 ---

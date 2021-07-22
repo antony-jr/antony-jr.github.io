@@ -3,9 +3,7 @@ author: Antony Jr.
 title: FreeCAD the most unusual popular open source project in a "Good Way" 💖
 description: "If you had worked with any popular open source project, you may know that they are very picky. Except for FreeCAD."
 tag: Personal
-imageProvided: true
-imageCopyright: Twitter
-
+image: "/blog-posts-assets/2021-01-24.png"
 read: 5
 ---
 

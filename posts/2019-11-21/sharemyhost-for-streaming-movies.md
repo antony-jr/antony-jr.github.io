@@ -2,7 +2,7 @@
 author: Antony Jr.
 title: ShareMyHost for streaming Movies from my Computer to Kodi
 description: "My solution on streaming Movies in my local network to my TV with Kodi."
-imageProvided: true
+image: "/blog-posts-assets/2019-11-21.png"
 tag: Project
 read: 5
 ---

@@ -2,7 +2,7 @@
 author: Antony Jr.
 title: Buying a Cloud Instace from Hetzner is Hard But Worth It
 description: "I've bought cloud instances from a lot of vendors but hetzner is the hardest to get"
-imageProvided: true
+image: "/blog-posts-assets/2020-08-10.png"
 imageCopyright: MyBroadband Blog
 tag: Personal
 read: 5
@@ -34,7 +34,7 @@ In the first attempt they asked me a scan of my government identity. So I sent a
 would call me back in 1-2 business days. I was really hoping to clear their security clearance but nope this is the email I get along with my
 Hetzner account disabled forever.
 
-![Email Repy from Hetzner](/2020-08-10-hetzner-email.png)
+![Email Repy from Hetzner](/blog-posts-assets/2020-08-10-hetzner-email.png)
 
 
 ### My Second Attempt on Registereing with Hetzner

@@ -3,9 +3,8 @@ author: Antony Jr.
 title: 🥳 My first patch got accepted into the Linux Kernel 🥳
 description: "My first patch to the Linux Kernel recently got merged into the upstream."
 tag: Personal
-imageProvided: true
+image: "/blog-posts-assets/2020-12-27.png"
 imageCopyright: Kernel.org
-
 read: 2
 ---
 
@@ -32,7 +31,7 @@ I sent the initial device tree for my device to maintainer of the Qualcomm group
 and was merged into the upstream after two weeks. I actually watered down a lot of story because I'm too lazy to write
 all of it. 
 
-![Kernel Commit Log](/2020-12-27.png)
+![Kernel Commit Log](/blog-posts-assets/2020-12-27.png)
 
 
 **It's very exciting to see my name along with the great "Linus Torvalds", I just wish I can get to a position where I could 

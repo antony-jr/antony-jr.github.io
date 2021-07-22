@@ -1,7 +1,7 @@
 import { Box, Stack, Image } from "@chakra-ui/react";
 import Fade from "react-reveal";
 
-export default function Logo({ src = "ajr_nav_logo_frame.png", ...rest }) {
+export default function Logo({ src = "/ajr_nav_logo_frame.png", ...rest }) {
   return (
     <Fade>
       <Box>

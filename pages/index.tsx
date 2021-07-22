@@ -9,6 +9,9 @@ import {
   Box,
   Container,
   Image,
+  Grid,
+  Center,
+  Button,
 } from "@chakra-ui/react";
 
 import matter from "gray-matter";
@@ -17,6 +20,10 @@ import ReactMarkdown from "react-markdown";
 const AnimatedProfile = dynamic(() => import("../components/AnimatedProfile"));
 const SocialButtons = dynamic(() => import("../components/SocialButtons"));
 const Donations = dynamic(() => import("../components/Donations"));
+const Subhead = dynamic(() => import("../components/Subhead"));
+const BlogCard = dynamic(() => import("../components/BlogCard"));
+const TerminalBox = dynamic(() => import("../components/TerminalBox"));
+const ContactForm = dynamic(() => import("../components/ContactForm"));
 
 function Title({ children, ...rest }) {
   return (
@@ -93,6 +100,103 @@ export default function Index(props) {
             </Stack>
           </Container>
         </Box>
+        <Box id="updates" as="section" pb={{ base: "2rem", md: "5rem" }}>
+          <Container maxW="container.lg">
+            <Subhead src="updates_title.png" />
+
+            <Stack
+              direction={["column", "column", "row", "row", "row"]}
+              spacing="6"
+            >
+              <Stack direction="column" spacing="6">
+                {props.posts.slice1.map((entry, index) => {
+                  return (
+                    <Center key={entry.slug}>
+                      <BlogCard
+                        to={"/blog/post/" + entry.slug}
+                        cover={entry.image}
+                        title={entry.title}
+                        description={entry.description}
+                        date={entry.date}
+                        copyright={entry.imageCopyright}
+                        tag={entry.tag}
+                      />
+                    </Center>
+                  );
+                })}
+              </Stack>
+
+              <Stack direction="column" spacing="6">
+                {props.posts.slice2.map((entry, index) => {
+                  return (
+                    <Center key={entry.slug}>
+                      <BlogCard
+                        to={"/blog/post/" + entry.slug}
+                        cover={entry.image}
+                        title={entry.title}
+                        description={entry.description}
+                        date={entry.date}
+                        copyright={entry.imageCopyright}
+                        tag={entry.tag}
+                      />
+                    </Center>
+                  );
+                })}
+              </Stack>
+
+              <Stack direction="column" spacing="6">
+                {props.posts.slice3.map((entry, index) => {
+                  return (
+                    <Center key={entry.slug}>
+                      <BlogCard
+                        to={"/blog/post/" + entry.slug}
+                        cover={entry.image}
+                        title={entry.title}
+                        description={entry.description}
+                        date={entry.date}
+                        copyright={entry.imageCopyright}
+                        tag={entry.tag}
+                      />
+                    </Center>
+                  );
+                })}
+              </Stack>
+            </Stack>
+          </Container>
+        </Box>
+
+        <Box id="publickeys" as="section" pb={{ base: "2rem", md: "5rem" }}>
+          <Container maxW="container.xl">
+            <Subhead src="pubkeys_title.png" />
+            <TerminalBox />
+            <br />
+            <Center>
+              <Button
+                colorScheme="green"
+                onClick={() => {
+                  window.open("/gpg.asc", "_blank");
+                }}
+              >
+                Get GPG Public Key
+              </Button>
+            </Center>
+          </Container>
+        </Box>
+
+        <Box id="contact" as="section" pb={{ base: "2rem", md: "5rem" }}>
+          <Container maxW="container.lg">
+            <Subhead src="contact_title.png" />
+            <br />
+            <Text fontSize="lg">
+              You can contact me through my email or in any social media
+              platform you wish to. But if you want to contact me directly, you
+              can use this form. This form sends your message directly to my
+              telegram bot, <b>so please don't spam me</b>.
+            </Text>
+            <br />
+            <ContactForm />
+          </Container>
+        </Box>
       </Box>
     </>
   );
@@ -100,17 +204,24 @@ export default function Index(props) {
 
 export async function getStaticProps() {
   //get posts & context from folder
-  const posts = ((context) => {
+  var posts = ((context) => {
     const keys = context.keys();
     const values = keys.map(context);
 
     const data = keys.map((key, index) => {
       // Create slug from filename
-      const slug = key
-        .replace(/^.*[\\\/]/, "")
-        .split(".")
-        .slice(0, -1)
-        .join(".");
+      let re = /(\d{4})-(\d{2})-(\d{2})\/[\w -]*\.md$/;
+      let matches = re.exec(key);
+
+      if (matches.length == 0) {
+        return {};
+      }
+
+      const slug = matches[0]
+        .replace("/", "-")
+        .replace("\\", "-")
+        .replace(".md", "");
+
       const value = values[index];
       // Parse yaml metadata & markdownbody in document
       // Side Note: I have no idea why typescript errors out.
@@ -122,7 +233,9 @@ export async function getStaticProps() {
       };
     });
     return data;
-  })(require.context("../posts", true, /\.md$/));
+  })(
+    require.context("../posts", true, /(\d{4})-(\d{2})-(\d{2})\/[\w -]*\.md$/)
+  );
 
   const site = ((context) => {
     const keys = context.keys();
@@ -179,43 +292,69 @@ export async function getStaticProps() {
     return new Date(year + "-" + month + "-" + day);
   }
 
-  var workingPosts = posts.filter(validFile);
-  workingPosts.sort(function (a, b) {
-    return +new Date(b.slug) - +new Date(a.slug);
+  posts = posts.filter(validFile);
+
+  posts.sort((a, b) => {
+    // @ts-ignore
+    return getDate(b) - getDate(a);
   });
 
-  var updates = workingPosts.slice(0, 9); // Take up first 9 entries.
-  for (let n = 0; n < updates.length; ++n) {
-    var cardSize = 1;
-    if (n == 0) {
-      cardSize = 2;
+  var updates = [];
+
+  for (let n = 0; n < posts.length; ++n) {
+    var post = posts[n];
+    const keys = Object.keys(post);
+
+    if (keys.indexOf("image") == -1) {
+      post = {
+        ...post,
+        image: "",
+      };
     }
-    // @ts-ignore
-    updates[n].cardSize = cardSize.toString();
-    // @ts-ignore
-    updates[n].dark = Math.random() >= 0.5;
-    // @ts-ignore
-    updates[n].date = getDate(updates[n]).toDateString();
+
+    if (keys.indexOf("imageCopyright") == -1) {
+      post = {
+        ...post,
+        imageCopyright: "",
+      };
+    }
+
+    post = {
+      ...post,
+      date: getDate(post).toDateString(),
+    };
+
+    updates.push(post);
   }
 
   var about = null;
   for (let n = 0; n < site.length; ++n) {
     if (site[n].slug == "about") {
       about = site[n];
-
       break;
     }
 
     // More details will be added later
   }
 
+  /// Slice 1
+  const slice1s = 0;
+  const slice1e = Math.ceil(updates.length / 3); /// 1/3 of all posts.
+
+  /// Slice 2
+  const slice2s = slice1e; /// end of slice 1 is the start.
+  const slice2e = slice2s + Math.ceil(updates.length / 3);
+
+  /// Slice 3
+  const slice3s = slice2e;
+  const slice3e = updates.length;
+
   return {
     props: {
       posts: {
-        length: updates.length,
-        flex1: updates.slice(0, 3),
-        flex2: updates.slice(3, 6),
-        flex3: updates.slice(6, 9),
+        slice1: updates.slice(slice1s, slice1e),
+        slice2: updates.slice(slice2s, slice2e),
+        slice3: updates.slice(slice3s, slice3e),
       },
       site: {
         about: about,

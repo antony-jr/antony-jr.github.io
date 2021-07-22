@@ -2,7 +2,7 @@
 author: Antony Jr.
 title: Buying a Domain with Namecheap
 description: "Long awaited task of buying a domain for myself is finally complete."
-imageProvided: true
+image: "/blog-posts-assets/2020-08-08.png"
 imageCopyright: Namecheap
 tag: Personal
 read: 5

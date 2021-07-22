@@ -2,7 +2,7 @@
 author: Antony Jr.
 title: Making AppImage for Insight GDB Debugger for Reading a Book on Assembly
 description: "How I made an AppImage for Insight GDB Debugger for finishing Step by Step Assembly Book by Jeff Duntemann"
-imageProvided: true
+image: "/blog-posts-assets/2018-04-24.png"
 imageCopyright: Redhat
 tag: AppImage
 read: 10

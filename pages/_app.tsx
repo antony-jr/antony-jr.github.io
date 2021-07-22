@@ -32,7 +32,7 @@ const theme = extendTheme({
     global: {
       body: {
         backgroundRepeat: "repeat",
-        backgroundImage: "url('img-noise.png')",
+        backgroundImage: "url('/img-noise.png')",
       },
     },
   },
@@ -95,7 +95,7 @@ function App({ Component, pageProps }) {
         style={{
           width: "100%",
           height: "70px",
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0), white)",
+          backgroundImage: "linear-gradient(transparent, white)",
         }}
       />
       <div
