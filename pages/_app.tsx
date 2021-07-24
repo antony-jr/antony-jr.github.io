@@ -16,6 +16,7 @@ import {
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
+  IconButton,
 } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import "@fontsource/dosis";
@@ -23,6 +24,8 @@ import "@fontsource/dosis";
 const Logo = dynamic(() => import("../components/Logo"));
 const MenuItem = dynamic(() => import("../components/MenuItem"));
 const SocialButtons = dynamic(() => import("../components/SocialButtons"));
+const ColorModeButton = dynamic(() => import("../components/ColorModeButton"));
+
 
 const theme = extendTheme({
   fonts: {
@@ -39,7 +42,7 @@ const nav = [
 
 function App({ Component, pageProps }) {
   const router = useRouter();
-
+  
   const handleLink = (link) => {
     if (link.charAt(0) != "#") {
       window.location = link;
@@ -83,7 +86,8 @@ function App({ Component, pageProps }) {
               );
             })}
           </Stack>
-        </Stack>
+	  <ColorModeButton/>
+	</Stack>
       </Flex>
       <Component {...pageProps} />
       <Box
