@@ -1,3 +1,4 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MainDoc extends Document {
@@ -52,6 +53,7 @@ class MainDoc extends Document {
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <body>
+          <ColorModeScript initialColorMode={"light"} />
           <Main />
           <NextScript />
         </body>

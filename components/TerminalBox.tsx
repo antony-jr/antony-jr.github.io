@@ -9,7 +9,7 @@ export default function TerminalBox(props) {
         align="center"
         justify="center"
       >
-        <Box maxW="lg">
+        <Box maxW={["100%", "100%", "100%", "lg"]}>
           <Text>
             This is <b>my primary key,</b> please follow this site to know if I
             change my key which will not be that often. You can encrypt

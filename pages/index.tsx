@@ -180,6 +180,7 @@ export default function Index(props) {
                 Get GPG Public Key
               </Button>
             </Center>
+            <br />
           </Container>
         </Box>
 
@@ -196,6 +197,8 @@ export default function Index(props) {
             <br />
             <ContactForm />
           </Container>
+          <br />
+          <br />
         </Box>
       </Box>
     </>

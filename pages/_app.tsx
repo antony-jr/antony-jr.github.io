@@ -22,19 +22,12 @@ import "@fontsource/dosis";
 
 const Logo = dynamic(() => import("../components/Logo"));
 const MenuItem = dynamic(() => import("../components/MenuItem"));
+const SocialButtons = dynamic(() => import("../components/SocialButtons"));
 
 const theme = extendTheme({
   fonts: {
     heading: "Dosis",
     body: "Dosis",
-  },
-  styles: {
-    global: {
-      body: {
-        backgroundRepeat: "repeat",
-        backgroundImage: "url('/img-noise.png')",
-      },
-    },
   },
 });
 
@@ -60,13 +53,14 @@ function App({ Component, pageProps }) {
 
   return (
     <ChakraProvider theme={theme}>
+      {" "}
       <Flex
+        pb="20"
         as="nav"
         align="center"
         justify="center"
         wrap="wrap"
         w="100%"
-        color={["black", "black", "primary.500", "primary.500"]}
       >
         <Stack direction="column" align="center" justify="center">
           <Logo alt="Nav Logo" />
@@ -91,22 +85,32 @@ function App({ Component, pageProps }) {
           </Stack>
         </Stack>
       </Flex>
-      <div
-        style={{
-          width: "100%",
-          height: "70px",
-          backgroundImage: "linear-gradient(transparent, white)",
-        }}
+      <Component {...pageProps} />
+      <Box
+        bgImage="url(/audio-bar.svg)"
+        bgPos="bottom center"
+        bgSize="120px"
+        bgRepeat="repeat no-repeat"
+        h="128px"
       />
-      <div
-        style={{
-          width: "100%",
-          minHeight: "90vh",
-          backgroundColor: "white",
-        }}
-      >
-        <Component {...pageProps} />
-      </div>
+      <Box as="footer" mt={12} textAlign="center">
+        <Text fontSize="md">
+          <span>
+            Designed and Developed with 💓 by{" "}
+            <a href="#">
+              <b>J.R. Divya Antony</b>
+            </a>
+            .
+          </span>
+        </Text>
+        <SocialButtons
+          mt={4}
+          mb={4}
+          spacing="12px"
+          iconBg={null}
+          justify="center"
+        />
+      </Box>
     </ChakraProvider>
   );
 }
