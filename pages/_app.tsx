@@ -26,7 +26,6 @@ const MenuItem = dynamic(() => import("../components/MenuItem"));
 const SocialButtons = dynamic(() => import("../components/SocialButtons"));
 const ColorModeButton = dynamic(() => import("../components/ColorModeButton"));
 
-
 const theme = extendTheme({
   fonts: {
     heading: "Dosis",
@@ -42,7 +41,7 @@ const nav = [
 
 function App({ Component, pageProps }) {
   const router = useRouter();
-  
+
   const handleLink = (link) => {
     if (link.charAt(0) != "#") {
       window.location = link;
@@ -86,8 +85,8 @@ function App({ Component, pageProps }) {
               );
             })}
           </Stack>
-	  <ColorModeButton/>
-	</Stack>
+          <ColorModeButton />
+        </Stack>
       </Flex>
       <Component {...pageProps} />
       <Box
