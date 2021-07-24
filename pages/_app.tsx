@@ -21,6 +21,9 @@ import {
 import { extendTheme } from "@chakra-ui/react";
 import "@fontsource/dosis";
 
+/// Optimize Color Mode for SSR
+import { Chakra } from "../components/Chakra";
+
 const Logo = dynamic(() => import("../components/Logo"));
 const MenuItem = dynamic(() => import("../components/MenuItem"));
 const SocialButtons = dynamic(() => import("../components/SocialButtons"));
@@ -54,7 +57,8 @@ function App({ Component, pageProps }) {
   };
 
   return (
-    <ChakraProvider theme={theme}>
+    // @ts-ignore
+    <ChakraProvider cookies={pageProps.cookies} theme={theme}>
       {" "}
       <Flex
         pb="20"
@@ -119,3 +123,5 @@ function App({ Component, pageProps }) {
 }
 
 export default App;
+
+export { getServerSideProps } from "../components/Chakra";
