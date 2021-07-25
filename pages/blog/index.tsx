@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 
 import matter from "gray-matter";
-import ReactMarkdown from "react-markdown";
 import SEO from "../../components/seo";
 
 const BlogEntry = dynamic(() => import("../../components/BlogEntry"));
