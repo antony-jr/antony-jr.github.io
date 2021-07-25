@@ -1,13 +1,14 @@
-import { Button, Box, Text, Stack } from "@chakra-ui/react";
+import { useColorModeValue, Button, Box, Text, Stack } from "@chakra-ui/react";
 
 export default function Donations(props) {
+  const borderColor = useColorModeValue("black", "white");
   return (
     <Stack direction="column" align="center" justify="center">
       <Button
         size="lg"
         variant="outline"
         border="2px"
-        borderColor="black"
+        borderColor={borderColor}
         height="65px"
         width="200px"
         _focus={{
