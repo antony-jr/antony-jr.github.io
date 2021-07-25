@@ -22,49 +22,9 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import SEO from "../../components/seo";
 
-import { BsTag } from "react-icons/bs";
-import { AiOutlineFieldTime } from "react-icons/ai";
-
-function BlogEntry(props) {
-  return (
-    <Stack direction="row" align="center" justify="center" spacing={4}>
-      <Box p="2" fontSize={["xs", "sm"]} style={{ fontFamily: "serif" }}>
-        {props.date}
-      </Box>
-      <Stack
-        align="flex-start"
-        direction="column"
-        cursor="pointer"
-        onClick={() => {
-          window.open(props.url, "_blank");
-        }}
-      >
-        <Text fontSize={["xs", "sm", "md", "lg", "xl"]}>
-          <b>{props.title}</b>
-        </Text>
-        <Stack align="center" justify="center" direction="row">
-          <Stack align="center" justify="center" direction="row">
-            <AiOutlineFieldTime />
-            <Text color="gray.500" fontSize="xs">
-              {props.read}
-            </Text>
-          </Stack>
-
-          <Stack align="center" justify="center" direction="row">
-            <BsTag />
-            <Text color="gray.500" fontSize="xs">
-              {props.tag}
-            </Text>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Stack>
-  );
-}
+const BlogEntry = dynamic(() => import("../../components/BlogEntry"));
 
 export default function Blog(props) {
-  console.log(props.posts[0]);
-
   function getDateString(slugName) {
     var r = slugName.split("-");
     if (r.length < 3) {
@@ -108,7 +68,7 @@ export default function Blog(props) {
                       <Center>
                         <Stack
                           direciion="column"
-                          spacing={6}
+                          spacing={8}
                           align="flex-start"
                         >
                           {entry.map((bp, idx) => {
