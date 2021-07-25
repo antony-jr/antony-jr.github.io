@@ -1,4 +1,5 @@
 import Head from "next/head";
+import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
 
 import {
@@ -16,12 +17,13 @@ import {
 
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
+import SEO from "../components/seo";
 
 const AnimatedProfile = dynamic(() => import("../components/AnimatedProfile"));
 const SocialButtons = dynamic(() => import("../components/SocialButtons"));
 const Donations = dynamic(() => import("../components/Donations"));
 const Subhead = dynamic(() => import("../components/Subhead"));
-const BlogCard = dynamic(() => import("../components/BlogCard"));
+const UpdatesArea = dynamic(() => import("../components/UpdatesArea"));
 const TerminalBox = dynamic(() => import("../components/TerminalBox"));
 const ContactForm = dynamic(() => import("../components/ContactForm"));
 
@@ -50,11 +52,20 @@ function BodyText({ children, ...rest }) {
 }
 
 export default function Index(props) {
+  const { observe, inView } = useInView({
+    threshold: 0.25,
+    unobserveOnEnter: true,
+  });
+
   return (
     <>
       <Head>
         <title>antonyjr.in</title>
       </Head>
+      <SEO
+        title="antonyjr.in"
+        description="Hi, I'm Antony. Aspiring Computer Scientist and Open Source Developer"
+      />
       <Box mb={0}>
         <Box id="home" as="section" pb={{ base: "2rem", md: "5rem" }}>
           <Container maxW="container.xl">
@@ -100,106 +111,65 @@ export default function Index(props) {
             </Stack>
           </Container>
         </Box>
-        <Box id="updates" as="section" pb={{ base: "2rem", md: "5rem" }}>
-          <Container maxW="container.lg">
-            <Subhead src="updates_title.png" />
 
-            <Stack
-              direction={["column", "column", "row", "row", "row"]}
-              spacing="6"
-            >
-              <Stack direction="column" spacing="6">
-                {props.posts.slice1.map((entry, index) => {
-                  return (
-                    <Center key={entry.slug}>
-                      <BlogCard
-                        to={"/blog/post/" + entry.slug}
-                        cover={entry.image}
-                        title={entry.title}
-                        description={entry.description}
-                        date={entry.date}
-                        copyright={entry.imageCopyright}
-                        tag={entry.tag}
-                      />
-                    </Center>
-                  );
-                })}
-              </Stack>
+        {/* This is a placeholder for inview. */}
+        <div
+          ref={observe}
+          style={{ height: "1000px", display: inView ? "none" : "block" }}
+        ></div>
 
-              <Stack direction="column" spacing="6">
-                {props.posts.slice2.map((entry, index) => {
-                  return (
-                    <Center key={entry.slug}>
-                      <BlogCard
-                        to={"/blog/post/" + entry.slug}
-                        cover={entry.image}
-                        title={entry.title}
-                        description={entry.description}
-                        date={entry.date}
-                        copyright={entry.imageCopyright}
-                        tag={entry.tag}
-                      />
-                    </Center>
-                  );
-                })}
-              </Stack>
+        {inView && (
+          <Box id="updates" as="section" pb={{ base: "2rem", md: "5rem" }}>
+            <Container maxW="container.lg">
+              <Subhead src="updates_title.png" />
+              <UpdatesArea posts={props.posts} />
+            </Container>
+          </Box>
+        )}
 
-              <Stack direction="column" spacing="6">
-                {props.posts.slice3.map((entry, index) => {
-                  return (
-                    <Center key={entry.slug}>
-                      <BlogCard
-                        to={"/blog/post/" + entry.slug}
-                        cover={entry.image}
-                        title={entry.title}
-                        description={entry.description}
-                        date={entry.date}
-                        copyright={entry.imageCopyright}
-                        tag={entry.tag}
-                      />
-                    </Center>
-                  );
-                })}
-              </Stack>
-            </Stack>
-          </Container>
-        </Box>
+        {inView && (
+          <Box id="publickeys" as="section" pb={{ base: "2rem", md: "5rem" }}>
+            <Container maxW="container.xl">
+              <Subhead src="pubkeys_title.png" />
+              <TerminalBox />
+              <br />
+              <Center>
+                <Button
+                  _focus={{
+                    boxShadow:
+                      "0 0 1px 2px rgba(255, 255, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+                  }}
+                  _hover={{ borderColor: "black" }}
+                  onClick={() => {
+                    window.open("/gpg.asc", "_blank");
+                  }}
+                >
+                  Get GPG Public Key
+                </Button>
+              </Center>
+              <br />
+            </Container>
+          </Box>
+        )}
 
-        <Box id="publickeys" as="section" pb={{ base: "2rem", md: "5rem" }}>
-          <Container maxW="container.xl">
-            <Subhead src="pubkeys_title.png" />
-            <TerminalBox />
+        {inView && (
+          <Box id="contact" as="section" pb={{ base: "2rem", md: "5rem" }}>
+            <Container maxW="container.lg">
+              <Subhead src="contact_title.png" />
+              <br />
+              <Text fontSize="lg">
+                You can contact me through my email or in any social media
+                platform you wish to. But if you want to contact me directly,
+                you can use this form. This form sends your message directly to
+                my telegram bot, <b>so please don't spam me</b>.
+              </Text>
+              <br />
+              <ContactForm />
+            </Container>
             <br />
-            <Center>
-              <Button
-                colorScheme="green"
-                onClick={() => {
-                  window.open("/gpg.asc", "_blank");
-                }}
-              >
-                Get GPG Public Key
-              </Button>
-            </Center>
             <br />
-          </Container>
-        </Box>
-
-        <Box id="contact" as="section" pb={{ base: "2rem", md: "5rem" }}>
-          <Container maxW="container.lg">
-            <Subhead src="contact_title.png" />
-            <br />
-            <Text fontSize="lg">
-              You can contact me through my email or in any social media
-              platform you wish to. But if you want to contact me directly, you
-              can use this form. This form sends your message directly to my
-              telegram bot, <b>so please don't spam me</b>.
-            </Text>
-            <br />
-            <ContactForm />
-          </Container>
-          <br />
-          <br />
-        </Box>
+          </Box>
+        )}
       </Box>
     </>
   );

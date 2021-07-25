@@ -7,7 +7,7 @@ export default function Subhead({ src, ...rest }) {
     <Fade>
       <Box pb="16">
         <Stack direction="column" align="center" justify="center">
-          <Image src={src} />
+          <Image src={src} alt={src + " image"} />
         </Stack>
       </Box>
     </Fade>
