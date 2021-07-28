@@ -29,7 +29,7 @@ export default function BlogCard({
           }}
           borderWidth="xs"
           onClick={() => {
-            window.open(to, "_blank");
+            window.open(to, "_self");
           }}
           style={{
             backgroundColor: "transparent",

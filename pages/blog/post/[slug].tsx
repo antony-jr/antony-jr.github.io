@@ -12,7 +12,6 @@ import {
   Link,
 } from "@chakra-ui/react";
 
-import ReactMarkdown from "react-markdown";
 import matter from "gray-matter";
 import SEO from "../../../components/seo";
 
@@ -20,25 +19,9 @@ import { BsCalendarFill } from "react-icons/bs";
 import { BsTag } from "react-icons/bs";
 import { AiFillClockCircle } from "react-icons/ai";
 
-function BodyText(props) {
-  return (
-    <Text fontSize="lg" pb="4">
-      {props.children}
-    </Text>
-  );
-}
-
-function BodyLink({ children, ...rest }) {
-  return (
-    <Link
-      {...rest}
-      style={{ textDecoration: "underline", textDecorationStyle: "dotted" }}
-      isExternal
-    >
-      {children}
-    </Link>
-  );
-}
+const ChakraReactMarkdown = dynamic(
+  () => import("../../../components/ChakraReactMarkdown")
+);
 
 export default function BlogPost(props) {
   const infoFontSize = ["xs", "xs", "md", "lg"];
@@ -101,9 +84,7 @@ export default function BlogPost(props) {
             </Box>
             <Center>
               <Box textAlign="left">
-                <ReactMarkdown components={{ p: BodyText, a: BodyLink }}>
-                  {props.markdownBody}
-                </ReactMarkdown>
+                <ChakraReactMarkdown>{props.markdownBody}</ChakraReactMarkdown>
               </Box>
             </Center>
           </Stack>

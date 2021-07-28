@@ -18,7 +18,7 @@ export default function BlogEntry(props) {
         direction="column"
         cursor="pointer"
         onClick={() => {
-          window.open(props.url, "_blank");
+          window.open(props.url, "_self");
         }}
       >
         <Text fontSize={["xs", "sm", "md", "lg", "xl"]}>

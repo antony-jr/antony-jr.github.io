@@ -126,7 +126,10 @@ export default function Index(props) {
                 {props.spotlight.frontmatter.spotlight}
               </Text>
               <br />
-              <ProjectEntry data={props.spotlight.frontmatter} />
+              <ProjectEntry
+                slug={props.spotlight.slug}
+                data={props.spotlight.frontmatter}
+              />
               <br />
               <br />
             </Container>

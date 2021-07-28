@@ -43,7 +43,7 @@ export default function ProjectCard(props) {
               _hover={{ borderColor: "black" }}
               size="lg"
               onClick={() => {
-                window.open("/project/page/" + props.slug, "_blank");
+                window.open("/projects/page/" + props.slug, "_self");
               }}
             >
               Learn More
