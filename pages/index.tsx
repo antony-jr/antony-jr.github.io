@@ -185,7 +185,7 @@ export default function Index(props) {
                     <b>so please don't spam me</b>.
                   </Text>
                   <br />
-                  <ContactForm />
+                  <ContactForm api={props.contactAPI} />
                 </div>
               )}
             </Container>
@@ -379,12 +379,17 @@ export async function getStaticProps() {
 
   const env_keys = Object.keys(process.env);
   const showContact =
-    env_keys.indexOf("TELEGRAM_BOT_TOKEN") !== -1 &&
-    env_keys.indexOf("TELEGRAM_GROUP_ID_TARGET") !== -1;
-
+    (env_keys.indexOf("TELEGRAM_BOT_TOKEN") !== -1 &&
+      env_keys.indexOf("TELEGRAM_GROUP_ID_TARGET") !== -1) ||
+    env_keys.indexOf("CONTACT_API_URL") !== -1;
+  const api =
+    env_keys.indexOf("CONTACT_API_URL") !== -1
+      ? process.env.CONTACT_API_URL
+      : null;
   return {
     props: {
       showContact: showContact,
+      contactAPI: api,
       spotlight: spotlight,
       posts: {
         slice1: updates.slice(slice1s, slice1e),

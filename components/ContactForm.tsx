@@ -48,32 +48,34 @@ export default function ContactForm(props) {
       <Formik
         initialValues={{ name: "", email: "", message: "" }}
         onSubmit={(values, actions) => {
-          axios.post("/api/contact", values).then(({ data }) => {
-            actions.setSubmitting(false);
-            actions.resetForm();
-            if (!data.error) {
-              toast({
-                title: "Message Sent",
-                description:
-                  "Hi " +
-                  values.name +
-                  ", Thanks for contacting, your message has been sent. 💕",
-                status: "success",
-                duration: 9000,
-                isClosable: true,
-              });
-            } else {
-              toast({
-                title: "Failed to Send",
-                description:
-                  "Sorry " + values.name + ", Something went wrong. 😥",
-                status: "error",
-                duration: 9000,
-                isClosable: true,
-              });
-              console.log(data);
-            }
-          });
+          axios
+            .post(props.api ? props.api : "/api/contact", values)
+            .then(({ data }) => {
+              actions.setSubmitting(false);
+              actions.resetForm();
+              if (!data.error) {
+                toast({
+                  title: "Message Sent",
+                  description:
+                    "Hi " +
+                    values.name +
+                    ", Thanks for contacting, your message has been sent. 💕",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              } else {
+                toast({
+                  title: "Failed to Send",
+                  description:
+                    "Sorry " + values.name + ", Something went wrong. 😥",
+                  status: "error",
+                  duration: 9000,
+                  isClosable: true,
+                });
+                console.log(data);
+              }
+            });
         }}
       >
         {(props) => {
