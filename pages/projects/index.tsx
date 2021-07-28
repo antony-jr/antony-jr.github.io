@@ -23,10 +23,10 @@ export default function Projects(props) {
   return (
     <>
       <Head>
-        <title> Projects - antonyjr.in</title>
+        <title>Projects</title>
       </Head>
       <SEO
-        title=" Projects - antonyjr.in"
+        title="Projects"
         description="Welcome to my Project Showcase, I'm Antony. I'm a Aspiring Computer Scientist and Open Source Developer, I put all details of my interesting projects here."
       />
       <Box mb={0}>

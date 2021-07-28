@@ -12,6 +12,7 @@ to the **AppImage Update** library made by the AppImage folks. The upstream proj
 more vanilla C++ folks and was sort of like a reference implementation. Also they lacked good documentation. But I can't blame
 the upstream because they are more focused on the core functionality of AppImages.
 
+
 My new C++ library was geared towards the **Qt folks**. The goal was to make a Qt plugin which can do the update mechanism with 
 less legacy code and make full use of the Qt framework. The software was made to work as a standalone library and a plugin to be 
 used with [**Update Deploy Qt**](https://github.com/antony-jr/updatedeployqt).

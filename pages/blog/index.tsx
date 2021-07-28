@@ -35,10 +35,10 @@ export default function Blog(props) {
   return (
     <>
       <Head>
-        <title> Blog - antonyjr.in</title>
+        <title>Blog</title>
       </Head>
       <SEO
-        title=" Blog - antonyjr.in"
+        title="Blog"
         description="Welcome to my Blog, I'm Antony. I'm a Aspiring Computer Scientist and Open Source Developer, I write anything that I find amusing here."
       />
       <Box mb={0}>

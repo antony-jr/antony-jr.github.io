@@ -26,6 +26,9 @@ const Subhead = dynamic(() => import("../components/Subhead"));
 const UpdatesArea = dynamic(() => import("../components/UpdatesArea"));
 const TerminalBox = dynamic(() => import("../components/TerminalBox"));
 const ContactForm = dynamic(() => import("../components/ContactForm"));
+const ContactSocialButtons = dynamic(
+  () => import("../components/ContactSocialButtons")
+);
 const ProjectEntry = dynamic(() => import("../components/ProjectEntry"));
 
 import BodyText from "../components/BodyText";
@@ -55,10 +58,10 @@ export default function Index(props) {
   return (
     <>
       <Head>
-        <title>antonyjr.in</title>
+        <title>Home</title>
       </Head>
       <SEO
-        title="antonyjr.in"
+        title="Home"
         description="Hi, I'm Antony. Aspiring Computer Scientist and Open Source Developer"
       />
       <Box mb={0}>
@@ -169,14 +172,22 @@ export default function Index(props) {
             <Container maxW="container.lg">
               <Subhead src="contact_title.png" />
               <br />
-              <Text fontSize="lg">
-                You can contact me through my email or in any social media
-                platform you wish to. But if you want to contact me directly,
-                you can use this form. This form sends your message directly to
-                my telegram bot, <b>so please don't spam me</b>.
-              </Text>
-              <br />
-              <ContactForm />
+              <Center>
+                <ContactSocialButtons />
+              </Center>
+              {props.showContact && (
+                <div>
+                  <Text fontSize="lg">
+                    You can contact me through my email or in any social media
+                    platform you wish to. But if you want to contact me
+                    directly, you can use this form. This form sends your
+                    message directly to my telegram bot,{" "}
+                    <b>so please don't spam me</b>.
+                  </Text>
+                  <br />
+                  <ContactForm />
+                </div>
+              )}
             </Container>
             <br />
             <br />
@@ -366,8 +377,14 @@ export async function getStaticProps() {
   const slice3s = slice2e;
   const slice3e = updates.length;
 
+  const env_keys = Object.keys(process.env);
+  const showContact =
+    env_keys.indexOf("TELEGRAM_BOT_TOKEN") !== -1 &&
+    env_keys.indexOf("TELEGRAM_GROUP_ID_TARGET") !== -1;
+
   return {
     props: {
+      showContact: showContact,
       spotlight: spotlight,
       posts: {
         slice1: updates.slice(slice1s, slice1e),

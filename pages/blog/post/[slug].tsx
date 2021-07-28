@@ -9,23 +9,160 @@ import {
   Container,
   Image,
   Center,
+  Link,
 } from "@chakra-ui/react";
 
 import ReactMarkdown from "react-markdown";
 import matter from "gray-matter";
 import SEO from "../../../components/seo";
 
+import { BsCalendarFill } from "react-icons/bs";
+import { BsTag } from "react-icons/bs";
+import { AiFillClockCircle } from "react-icons/ai";
+
+function BodyText(props) {
+  return (
+    <Text fontSize="lg" pb="4">
+      {props.children}
+    </Text>
+  );
+}
+
+function BodyLink({ children, ...rest }) {
+  return (
+    <Link
+      {...rest}
+      style={{ textDecoration: "underline", textDecorationStyle: "dotted" }}
+      isExternal
+    >
+      {children}
+    </Link>
+  );
+}
+
 export default function BlogPost(props) {
+  const infoFontSize = ["xs", "xs", "md", "lg"];
   return (
     <>
       <Head>
-        <title>{props.frontmatter.title} - Blog - antonyjr.in</title>
+        <title>{props.frontmatter.title}</title>
       </Head>
       <SEO
-        title={props.frontmatter.title + " - Blog - antonyjr.in"}
+        title={props.frontmatter.title}
         description={props.frontmatter.description}
       />
-      <Box mb={0}></Box>
+      <Box mb={4}>
+        <Container maxW="container.lg">
+          <Stack direction="column" align="center" justify="center">
+            <Box pb="4" textAlign="center">
+              <Heading as="h1" size="xl">
+                {props.frontmatter.title}
+              </Heading>
+            </Box>
+            <Box p="4" textAlign="center">
+              <Stack
+                spacing={6}
+                align="center"
+                justify="center"
+                direction="row"
+                wrap="wrap"
+              >
+                <Stack
+                  align="center"
+                  justify="center"
+                  direction="row"
+                  fontSize={infoFontSize}
+                  color="gray.500"
+                >
+                  <BsTag />
+                  <Text>{props.frontmatter.tag}</Text>
+                </Stack>
+                <Stack
+                  align="center"
+                  justify="center"
+                  direction="row"
+                  fontSize={infoFontSize}
+                  color="gray.500"
+                >
+                  <BsCalendarFill />
+                  <Text>{props.date}</Text>
+                </Stack>
+                <Stack
+                  align="center"
+                  justify="center"
+                  direction="row"
+                  fontSize={infoFontSize}
+                  color="gray.500"
+                >
+                  <AiFillClockCircle />
+                  <Text>{props.frontmatter.read} mins</Text>
+                </Stack>
+              </Stack>
+            </Box>
+            <Center>
+              <Box textAlign="left">
+                <ReactMarkdown components={{ p: BodyText, a: BodyLink }}>
+                  {props.markdownBody}
+                </ReactMarkdown>
+              </Box>
+            </Center>
+          </Stack>
+        </Container>
+      </Box>
+      <Container maxW="container.xl">
+        <Stack
+          align="space-between"
+          justify="space-between"
+          direction={["column", "column", "column", "row"]}
+          spacing={6}
+        >
+          {props.prevPost ? (
+            <Box
+              _hover={{
+                textDecoration: "underline",
+                textDecorationStyle: "dotted",
+              }}
+              textAlign="left"
+              cursor="pointer"
+              onClick={() => {
+                window.open("/blog/post/" + props.prevPost.slugName, "_self");
+              }}
+            >
+              <Heading pb="2" as="h4" size="lg">
+                Previous
+              </Heading>
+
+              <Text fontSize="md">{props.prevPost.title}</Text>
+              <Text fontSize="sm">{props.prevPost.date}</Text>
+            </Box>
+          ) : (
+            <Box />
+          )}
+
+          {props.nextPost && (
+            <Box
+              _hover={{
+                textDecoration: "underline",
+                textDecorationStyle: "dotted",
+              }}
+              textAlign="right"
+              cursor="pointer"
+              onClick={() => {
+                window.open("/blog/post/" + props.nextPost.slugName, "_self");
+              }}
+            >
+              <Heading pb="2" as="h4" size="lg">
+                Next
+              </Heading>
+
+              <Text fontSize="md">{props.nextPost.title}</Text>
+              <Text fontSize="sm">{props.nextPost.date}</Text>
+            </Box>
+          )}
+        </Stack>
+        <br />
+        <br />
+      </Container>
     </>
   );
 }
@@ -125,12 +262,14 @@ export async function getStaticProps({ ...ctx }) {
     prevPost = {
       date: getDate(prevPost.slugName).toDateString(),
       ...prevPost.frontmatter,
+      slugName: prevPost.slugName,
     };
   }
   if (nextPost) {
     nextPost = {
       date: getDate(nextPost.slugName).toDateString(),
       ...nextPost.frontmatter,
+      slugName: nextPost.slugName,
     };
   }
 

@@ -143,7 +143,7 @@ const App = ({ Component, pageProps }) => {
         <Box as="footer" mt={12} textAlign="center">
           <Text fontSize="md">
             <span>
-              Designed and Developed with 💓 by{" "}
+              Designed and Developed by{" "}
               <a href="#">
                 <b>J.R. Divya Antony</b>
               </a>
