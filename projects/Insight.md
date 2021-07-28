@@ -1,7 +1,6 @@
 ---
-image: "2018-04-24.png"
+image: "/project-assets/insight.png"
 title: Insight GDB Debugger AppImage
-url: https://github.com/antony-jr/insight
+github: https://github.com/antony-jr/insight
+description: "Insight GDB Debugger AppImage build scripts and patches to work as an AppImage."
 ---
-
-Insight GDB Debugger AppImage build scripts and patches to work as an AppImage.

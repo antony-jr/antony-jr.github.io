@@ -26,6 +26,9 @@ const Subhead = dynamic(() => import("../components/Subhead"));
 const UpdatesArea = dynamic(() => import("../components/UpdatesArea"));
 const TerminalBox = dynamic(() => import("../components/TerminalBox"));
 const ContactForm = dynamic(() => import("../components/ContactForm"));
+const ProjectEntry = dynamic(() => import("../components/ProjectEntry"));
+
+import BodyText from "../components/BodyText";
 
 function Title({ children, ...rest }) {
   return (
@@ -38,14 +41,6 @@ function Title({ children, ...rest }) {
 function SubTitle({ children, ...rest }) {
   return (
     <Text fontSize="2xl" {...rest}>
-      {children}
-    </Text>
-  );
-}
-
-function BodyText({ children, ...rest }) {
-  return (
-    <Text fontSize="md" {...rest}>
       {children}
     </Text>
   );
@@ -109,6 +104,8 @@ export default function Index(props) {
               </Stack>
               <Donations />
             </Stack>
+            <br />
+            <br />
           </Container>
         </Box>
 
@@ -117,6 +114,21 @@ export default function Index(props) {
           ref={observe}
           style={{ height: "1000px", display: inView ? "none" : "block" }}
         ></div>
+
+        {inView && props.spotlight && (
+          <Box id="spotlight" as="section" pb={{ base: "2rem", md: "5rem" }}>
+            <Container maxW="container.lg">
+              <Subhead src="spotlight_title.png" />
+              <Text textAlign="center" fontSize="2xl">
+                {props.spotlight.frontmatter.spotlight}
+              </Text>
+              <br />
+              <ProjectEntry data={props.spotlight.frontmatter} />
+              <br />
+              <br />
+            </Container>
+          </Box>
+        )}
 
         {inView && (
           <Box id="updates" as="section" pb={{ base: "2rem", md: "5rem" }}>
@@ -176,6 +188,38 @@ export default function Index(props) {
 }
 
 export async function getStaticProps() {
+  const projects = ((context) => {
+    const keys = context.keys();
+    const values = keys.map(context);
+
+    const data = keys.map((key, index) => {
+      // Create slug from filename
+      const slug = key
+        .replace(/^.*[\\\/]/, "")
+        .split(".")
+        .slice(0, -1)
+        .join(".");
+      const value = values[index];
+      // Parse yaml metadata & markdownbody in document
+      // @ts-ignore
+      const document = matter(value.default);
+      return {
+        frontmatter: document.data,
+        markdownBody: document.content,
+        slug,
+      };
+    });
+    return data;
+  })(require.context("../projects", true, /\.md$/));
+
+  var spotlight = null;
+  for (var iter = 0; iter < projects.length; ++iter) {
+    if (projects[iter].frontmatter.spotlight) {
+      spotlight = projects[iter];
+      break;
+    }
+  }
+
   //get posts & context from folder
   var posts = ((context) => {
     const keys = context.keys();
@@ -324,6 +368,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      spotlight: spotlight,
       posts: {
         slice1: updates.slice(slice1s, slice1e),
         slice2: updates.slice(slice2s, slice2e),

@@ -1,8 +1,7 @@
 ---
-image: "blueglow.png"
+image: "/project-assets/blueglow.png"
 title: Blue Glow
-url: https://github.com/antony-jr/blue-glow
+github: https://github.com/antony-jr/blue-glow
+description: "Qt/QML C++ system tray application that can notify the user when there is a new Github Notification. Built for Github users in mind."
 ---
 
-Blue Glow is a Qt/QML C++ system tray application that can notify the user when 
-there is a new Github notification. Built for Github users in mind.

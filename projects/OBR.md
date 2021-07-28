@@ -1,8 +1,7 @@
 ---
-image: "obr.png"
+image: "/project-assets/obr.png"
 title: Optical Braille Recognition
-url: https://github.com/antony-jr/OpticalBrailleRecognition
+github: https://github.com/antony-jr/OpticalBrailleRecognition
+description: "Simple Python Library which uses OpenCV to do single sided English braille recognition. Can be integrated with Machine Learning"
 ---
 
-This is a simple python library which uses OpenCV to do single sided English braille recognition.
-I used simple Computational geometry but you can even integrate it with Machine Learning.

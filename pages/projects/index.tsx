@@ -17,6 +17,8 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import SEO from "../../components/seo";
 
+const ProjectCard = dynamic(() => import("../../components/ProjectCard"));
+
 export default function Projects(props) {
   return (
     <>
@@ -34,7 +36,17 @@ export default function Projects(props) {
           pb={{ base: "2rem", md: "5rem" }}
           style={{ minHeight: "90vh" }}
         >
-          <Container maxW="container.xl"></Container>
+          <Container maxW="container.xl">
+            {props.projects.map((entry, index) => {
+              return (
+                <ProjectCard
+                  slug={entry.slug}
+                  key={entry.slug + "-" + String(index)}
+                  data={entry.frontmatter}
+                />
+              );
+            })}
+          </Container>
         </Box>
       </Box>
     </>

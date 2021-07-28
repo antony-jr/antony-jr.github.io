@@ -1,8 +1,6 @@
 ---
-image: "2019-11-21.png"
+image: "/project-assets/sharemyhost.png"
 title: Share My Host
-url: https://github.com/antony-jr/ShareMyHost
+github: https://github.com/antony-jr/ShareMyHost
+description: "Qt/QML C++ application that can make file sharing easy as possible. Primarily built to stream videos to Kodi or a Smart TV."
 ---
-
-Share My Host is a Qt/QML C++ application that can make file sharing easy as possible. 
-Primarily built to stream vidoes to Kodi or a Smart TV.
