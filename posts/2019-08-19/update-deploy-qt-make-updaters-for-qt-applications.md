@@ -35,7 +35,7 @@ It initially gained support from some Qt projects. But some were skeptical becau
 If you want to support the project then please star it at https://github.com/antony-jr/updatedeployqt
 
 
-![issue](/updatedeployqtissue.png)
+![issue](/blog-posts-assets/updatedeployqtissue.png)
 
 **I have put the project on pause because the code injection did not seem to work well Qt/QML projects. But Now I've finally discovered
 on how to do that but I'm really really lazy on implementing it.**
