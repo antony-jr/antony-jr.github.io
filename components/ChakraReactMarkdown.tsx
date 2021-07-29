@@ -1,7 +1,5 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { nord } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import {
   Text,
@@ -15,6 +13,7 @@ import {
   OrderedList,
   ListItem,
   CircularProgress,
+  Code,
 } from "@chakra-ui/react";
 
 import { Tweet } from "react-twitter-widgets";
@@ -132,22 +131,24 @@ function CodeBlock({ node, inline, className, children, ...rest }) {
   if (language == "tweet") {
     return <TweetCard>{children}</TweetCard>;
   } else {
-    return (
-      <Center>
-        <Box w="100%">
-          <SyntaxHighlighter
-            wrapLongLines={true}
-            wrapLines={true}
-            showLineNumbers={true}
-            showlanguage={language}
-            style={nord}
-            {...rest}
-          >
-            {children}
-          </SyntaxHighlighter>
+    if (inline) {
+      return <Code>{children}</Code>;
+    } else {
+      return (
+        <Box
+          overflow="auto"
+          p="5"
+          as="pre"
+          borderWidth="2px"
+          bg="black"
+          color="green"
+          w="100%"
+          maxW={["lg", "lg", "lg", "100%"]}
+        >
+          {children}
         </Box>
-      </Center>
-    );
+      );
+    }
   }
 }
 
