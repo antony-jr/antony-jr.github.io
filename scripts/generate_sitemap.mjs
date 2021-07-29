@@ -1,8 +1,10 @@
-const globby = require( 'globby' );
-const matter = require('gray-matter');
-const { SitemapStream, streamToPromise } = require( 'sitemap' )
-const { Readable } = require( 'stream' )
-const fs = require( 'fs' );
+import { globby } from "globby";
+
+import matter from "gray-matter";
+
+import { SitemapStream, streamToPromise } from "sitemap";
+import  { Readable } from "stream";
+import fs from "fs";
 
 /// Website Constants
 /*  | */ const DOMAIN = "https://antonyjr.in/";               /* | */
@@ -53,7 +55,7 @@ blog_globs.then((paths) => {
 		}
 
 	   	if(image[0] == '/') {
-		   image = image.slice(1, -1);
+		   image = image.slice(1, image.length);
 		}
 
 		links.push({

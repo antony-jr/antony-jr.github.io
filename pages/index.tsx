@@ -17,7 +17,6 @@ import {
 
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
-import SEO from "../components/seo";
 
 const AnimatedProfile = dynamic(() => import("../components/AnimatedProfile"));
 const SocialButtons = dynamic(() => import("../components/SocialButtons"));
@@ -57,13 +56,6 @@ export default function Index(props) {
 
   return (
     <>
-      <Head>
-        <title>Home</title>
-      </Head>
-      <SEO
-        title="Home"
-        description="Hi, I'm Antony. Aspiring Computer Scientist and Open Source Developer"
-      />
       <Box mb={0}>
         <Box id="home" as="section" pb={{ base: "2rem", md: "5rem" }}>
           <Container maxW="container.xl">

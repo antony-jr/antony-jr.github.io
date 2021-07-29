@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next build && next start",
     "export": "next export",
-    "sitemap": "node scripts/generate_sitemap.js"
+    "sitemap": "node scripts/generate_sitemap.mjs"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.5",
