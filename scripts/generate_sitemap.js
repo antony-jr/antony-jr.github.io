@@ -1,4 +1,5 @@
 const globby = require( 'globby' );
+const matter = require('gray-matter');
 const { SitemapStream, streamToPromise } = require( 'sitemap' )
 const { Readable } = require( 'stream' )
 const fs = require( 'fs' );
@@ -15,36 +16,51 @@ console.log('');
 console.log("Domain: ", DOMAIN);
 console.log("Generating links... ");
 
-const blog_globs = globby(['posts/*md']);
+const blog_globs = globby(['posts/*/*.md']);
 blog_globs.then((paths) => {
 	/// Add the index page to the sitemap first.
 	var links = [{
 		img: DOMAIN + 'ajr_logo.png',
 		url: INDEX_PAGE,
 		changefreq: 'daily',
-		priority: 0.8
+		priority: 1
 	},
 	{
 		img: DOMAIN + 'ajr_logo.png',
 		url: DOMAIN + 'blog',
 		changefreq: 'daily',
-		priority: 0.5
+		priority: 1
 	},
 	{
 		img: DOMAIN + 'ajr_logo.png',
 		url: DOMAIN + 'projects',
 		changefreq: 'daily',
-		priority: 0.5
+		priority: 1
 	}];
 
 	for(var i = 0; i < paths.length ; ++i) {
-		const post = paths[i].replace('posts/', '').replace('.md','.html');
-		const image = post.replace('.html', '.png');
+	        const md_path = paths[i];
+		const post = paths[i].replace('posts/', '').replace('.md','').replace('/', '-');
+
+	   	var priority = 0.3;
+		var image = "ajr_logo.png";
+		const doc = matter(fs.readFileSync(md_path, 'utf8'));
+		if(typeof doc.data.image == "string") {
+		   image = doc.data.image
+		}
+	   	if(typeof doc.data.priority == "number") {
+		   priority = doc.data.priority;
+		}
+
+	   	if(image[0] == '/') {
+		   image = image.slice(1, -1);
+		}
+
 		links.push({
 			img: DOMAIN + image,
 			url: BLOG_BASE_URL + post,
 			changefreq: 'daily',
-			priority: 0.3
+			priority: priority
 		});
 	}
 

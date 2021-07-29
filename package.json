@@ -1,9 +1,9 @@
 {
   "name": "website",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Official Website for Antony Jr",
   "main": "index.js",
-  "repository": "https://github.com/antony-jr/website",
+  "repository": "https://github.com/antony-jr/antony-jr.github.io",
   "author": "antony-jr <antonyjr@protonmail.com>",
   "license": "MIT",
   "scripts": {
@@ -15,24 +15,36 @@
     "sitemap": "node scripts/generate_sitemap.js"
   },
   "dependencies": {
-    "bootstrap": "^4.5.2",
-    "globby": "^11.0.2",
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@fontsource/dosis": "^4.5.0",
+    "axios": "^0.21.1",
+    "formik": "^2.2.9",
+    "framer-motion": "^4",
+    "globby": "^12.0.0",
     "gray-matter": "^4.0.2",
-    "next": "^9.5.1",
+    "next": "^11.0.1",
+    "next-seo": "^4.26.0",
+    "node-telegram-bot-api": "^0.54.0",
     "raw-loader": "^4.0.1",
     "rc-tween-one": "^2.7.3",
-    "react": "^16.13.1",
-    "react-bootstrap": "^1.3.0",
-    "react-dom": "^16.13.1",
-    "react-icons": "^3.10.0",
-    "react-markdown": "^4.3.1",
+    "react": "^17.0.2",
+    "react-cool-inview": "^2.0.7",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-markdown": "^6.0.2",
     "react-reveal": "^1.2.2",
-    "react-social-icons": "^4.1.0",
-    "react-twitter-widgets": "^1.9.5",
-    "sitemap": "^6.3.5",
-    "styled-components": "^5.1.1"
+    "react-social-icons": "^5.5.1",
+    "react-syntax-highlighter": "^15.4.4",
+    "react-twitter-widgets": "^1.10.0",
+    "sitemap": "^7.0.0",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
+    "@types/react": "^17.0.15",
+    "@types/webpack-env": "^1.16.2",
+    "prettier": "2.3.2",
+    "typescript": "^4.3.5"
   }
 }
