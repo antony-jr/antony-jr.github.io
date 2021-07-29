@@ -133,11 +133,20 @@ function CodeBlock({ node, inline, className, children, ...rest }) {
     return <TweetCard>{children}</TweetCard>;
   } else {
     return (
-      <Box maxW="xl">
-        <SyntaxHighlighter language={language} style={nord} {...rest}>
-          {children}
-        </SyntaxHighlighter>
-      </Box>
+      <Center>
+        <Box w="100%">
+          <SyntaxHighlighter
+            wrapLongLines={true}
+            wrapLines={true}
+            showLineNumbers={true}
+            showlanguage={language}
+            style={nord}
+            {...rest}
+          >
+            {children}
+          </SyntaxHighlighter>
+        </Box>
+      </Center>
     );
   }
 }

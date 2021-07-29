@@ -29,31 +29,6 @@ Qt Installer Framework.
 * *Drink the Qt Kool-aid* - In a positive way.
 
 
-**Witness it with your own eyes,**
-
-```cpp
-#include <QCoreApplication>
-#include <QArchive/QArchive>
-
-int main(int argc, char **argv)
-{
-    using QArchive::DiskExtractor;
-    QCoreApplication app(argc, argv);
-    DiskExtractor Extractor("Test.7z");
-    
-    /* Connect Signals and Slots. */
-    QObject::connect(&Extractor , 
-                     &DiskExtractor::finished , 
-                     &app , 
-                     &QCoreApplication::quit);
-    
-    Extractor.start();
-    return app.exec();
-}
-```
-
-
-
 # Getting Started
 
 Learn more about **QArchive** at the official [documentation](https://antony-jr.github.io/QArchive).
@@ -63,7 +38,7 @@ Learn more about **QArchive** at the official [documentation](https://antony-jr.
 
 *Thanks to [Eric Riff](https://github.com/ericriff)*.
 
-Starting from version 2.0.1 `QArchive` is available on the [Conan C/C++ package manager](https://conan.io/), which means you can download prebuilt packages for all major platforms (Windows, Linux, macOS, etc).
+Starting from version **2.0.1** QArchive is available on the [Conan C/C++ package manager](https://conan.io/), which means you can download prebuilt packages for all major platforms (Windows, Linux, macOS, etc).
 
 Find an example on how to consume Conan's precompiled packages in the examples folder.
 

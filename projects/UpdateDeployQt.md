@@ -36,62 +36,6 @@ build the **Application** , *as long as it uses Qt framework , this feature can 
 
 * *Drink the Qt Kool-aid* - In a positive way.
 
-
-# Installation
-
-### Linux 
-
-You don't need to compile this from source , simply download the latest AppImage from releases and make it
-executable and you are ready to go. This works in travis-ci and other such services too. So you can deploy
-update directly on continuous integration services.
-
-You can download the latest AppImage from this [url](https://github.com/antony-jr/updatedeployqt/releases/download/continuous/updatedeployqt-continuous-x86_64.AppImage). This *url* will be constant and will never change and thus
-you can use this *url* to download the AppImage using wget whenever you want to use it.
-
-```
- $ wget -O updatedeployqt-x86_64.AppImage "https://git.io/fj4CH"
- $ chmod +x updatedeployqt-x86_64.AppImage
- $ ./updatedeployqt-x86_64.AppImage
-```
-
-### Windows
-
-Not yet implemented
-
-### MacOSX
-
-Not yet implemented
-
-
-# Usage
-
-The program looks for **updatedeployqt.json** in the current working directory or in the path 
-given through ```-c,--config``` argument. This configuration file can be interactively generated
-by passing ```-g,--generate-config``` argument to the program.
-
-This configuration file will decide on how the updater should work , such as auto update without
-the users concern or integrate the updater into a menu bar item.
-
-After generating the configuration file , you can simply run the below command to deploy your 
-updater.
-
-
-```
- $ updatedeployqt [PATH TO DEPLOY DIRECTORY]
-```
-
-or if **updatedeployqt.json** is not in the current working directory.
-
-```
- $ updatedeployqt -c[PATH TO CONFIG FILE] [PATH TO DEPLOY DIRECTORY]
-```
-
-
-The **deploy directory** is a directory which you have finalized and packaged all required libraries 
-and plugins along with your executable and resources. In case you are packaging **AppImages** then 
-the **deploy directory** is your **AppDir**. 
-
-
 # Projects Using This
 
 Feel free to open a **PR** to include your project too. Here are some known projects which use this to deploy
