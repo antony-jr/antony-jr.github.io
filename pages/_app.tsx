@@ -60,7 +60,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <DefaultSeo
-        title="antonyjr.in"
+        title="Home"
         titleTemplate=" %s - antonyjr.in"
         description="Hi, I'm Antony. Aspiring Computer Scientist and Open Source Developer"
         twitter={{
