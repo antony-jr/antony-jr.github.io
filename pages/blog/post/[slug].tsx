@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
@@ -9,7 +10,7 @@ import {
   Container,
   Image,
   Center,
-  Link,
+  Divider,
 } from "@chakra-ui/react";
 
 import matter from "gray-matter";
@@ -34,7 +35,7 @@ export default function BlogPost(props) {
         title={props.frontmatter.title}
         description={props.frontmatter.description}
       />
-      <Box mb={4}>
+      <Box mb={6}>
         <Container maxW="container.lg">
           <Stack direction="column" align="center" justify="center">
             <Box pb="4" textAlign="center">
@@ -90,57 +91,62 @@ export default function BlogPost(props) {
           </Stack>
         </Container>
       </Box>
+      <Box pt={2} pb={4}>
+        <Center>
+          <Image w="auto" height="150px" src="/vline.png" />
+        </Center>
+      </Box>
       <Container maxW="container.xl">
         <Stack
           align="space-between"
           justify="space-between"
           direction={["column", "column", "column", "row"]}
           spacing={6}
+          pt={4}
         >
           {props.prevPost ? (
-            <Box
-              _hover={{
-                textDecoration: "underline",
-                textDecorationStyle: "dotted",
-              }}
-              textAlign="left"
-              cursor="pointer"
-              onClick={() => {
-                window.open("/blog/post/" + props.prevPost.slugName, "_self");
-              }}
-            >
-              <Heading pb="2" as="h4" size="lg">
-                Previous
-              </Heading>
+            <Link href={"/blog/post/" + props.prevPost.slugName}>
+              <Box
+                _hover={{
+                  textDecoration: "underline",
+                  textDecorationStyle: "dotted",
+                }}
+                textAlign="left"
+                cursor="pointer"
+              >
+                <Heading pb="2" as="h4" size="xl">
+                  Previous
+                </Heading>
 
-              <Text fontSize="md">{props.prevPost.title}</Text>
-              <Text fontSize="sm">{props.prevPost.date}</Text>
-            </Box>
+                <Text fontSize="md">{props.prevPost.title}</Text>
+                <Text fontSize="sm">{props.prevPost.date}</Text>
+              </Box>
+            </Link>
           ) : (
             <Box />
           )}
 
           {props.nextPost && (
-            <Box
-              _hover={{
-                textDecoration: "underline",
-                textDecorationStyle: "dotted",
-              }}
-              textAlign="right"
-              cursor="pointer"
-              onClick={() => {
-                window.open("/blog/post/" + props.nextPost.slugName, "_self");
-              }}
-            >
-              <Heading pb="2" as="h4" size="lg">
-                Next
-              </Heading>
+            <Link href={"/blog/post/" + props.nextPost.slugName}>
+              <Box
+                _hover={{
+                  textDecoration: "underline",
+                  textDecorationStyle: "dotted",
+                }}
+                textAlign="right"
+                cursor="pointer"
+              >
+                <Heading pb="2" as="h4" size="xl">
+                  Next
+                </Heading>
 
-              <Text fontSize="md">{props.nextPost.title}</Text>
-              <Text fontSize="sm">{props.nextPost.date}</Text>
-            </Box>
+                <Text fontSize="md">{props.nextPost.title}</Text>
+                <Text fontSize="sm">{props.nextPost.date}</Text>
+              </Box>
+            </Link>
           )}
         </Stack>
+        <br />
         <br />
         <br />
       </Container>

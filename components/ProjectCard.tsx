@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Center, Stack, Image, Box, Heading, Button } from "@chakra-ui/react";
 import ProjectButtons from "./ProjectButtons";
 import BodyText from "./BodyText";
@@ -35,19 +36,20 @@ export default function ProjectCard(props) {
               github={props.data.github}
             />
             <br />
-            <Button
-              _focus={{
-                boxShadow:
-                  "0 0 1px 2px rgba(255, 255, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
-              }}
-              _hover={{ borderColor: "black" }}
-              size="lg"
-              onClick={() => {
-                window.open("/projects/page/" + props.slug, "_self");
-              }}
-            >
-              Learn More
-            </Button>
+            <Link href={"/projects/page/" + props.slug}>
+              <Button
+                as="div"
+                cursor="pointer"
+                _focus={{
+                  boxShadow:
+                    "0 0 1px 2px rgba(255, 255, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+                }}
+                _hover={{ borderColor: "black" }}
+                size="lg"
+              >
+                Learn More
+              </Button>
+            </Link>
           </Box>
         </Stack>
       </Box>

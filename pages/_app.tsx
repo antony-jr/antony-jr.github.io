@@ -46,17 +46,6 @@ const nav = [
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
 
-  const handleLink = (link) => {
-    if (link.charAt(0) != "#") {
-      window.location = link;
-    } else {
-      const element = document.querySelector(link);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   return (
     <>
       <DefaultSeo
@@ -122,7 +111,6 @@ const App = ({ Component, pageProps }) => {
                     isActive={router.pathname == entry["to"]}
                     key={entry["to"] + "-default"}
                     to={entry["to"]}
-                    linkSignal={handleLink}
                   >
                     {entry["name"]}
                   </MenuItem>

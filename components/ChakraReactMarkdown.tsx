@@ -101,8 +101,6 @@ function TweetCard(props) {
     }
   }
 
-  console.log(tweetId);
-
   return (
     <Center>
       <Box w={["xs", "sm", "md", "lg"]}>
