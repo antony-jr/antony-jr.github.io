@@ -16,7 +16,7 @@ export default function Logo({
           <Image
             src={img_src}
             {...rest}
-            w={["300px", "510px", "510px", "580px", "580px"]}
+            w={["410px", "510px", "510px", "580px", "580px"]}
             h="auto"
           />
         </Stack>
